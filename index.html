@@ -1,0 +1,1258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Billy Newton — Senior Designer · 2027</title>
+<meta name="description" content="Billy Newton — Senior Designer, London. Product visualisation, internal apps, interactive experiences, Figma templates and printed matter at Checkout.com.">
+<meta name="theme-color" content="#181818">
+<link rel="icon" type="image/svg+xml" href="img/mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Billy Newton · Portfolio 2027
+   Built from the Figma PDF portfolio (file dMo29uEcxFJ2nu3MstY7xy, page "Version 2").
+   The site is the deck: every project is a pinned stage that steps through
+   the slides in the deck's order. Text columns build one at a time, media
+   overlays dim the text behind them, videos play only on their own slide.
+   Type: Inter Medium. Breadcrumb 15px · Display 62.9px/0.86 · Body 26.8px/1.14
+   Grid: 4 columns, 62px gutter. Palette (cover scramble, Figma node 9:238):
+   #186AFF · #B3FF1A · #AA00FF · #FF1AD1 · #FF591A
+   ============================================================ */
+:root{
+  --dark:#181818; --black:#000; --paper:#fff; --panel:#f3f3f3;
+  --blue:#186AFF; --lime:#B3FF1A; --purple:#AA00FF; --magenta:#FF1AD1; --orange:#FF591A;
+  --pad: clamp(24px, 3.333vw, 64px);
+  --gut: clamp(22px, 3.23vw, 62px);
+  --stage-top: clamp(96px, 19.5svh, 211px);
+  --crumb: clamp(12px, .78vw, 15px);
+  --display: clamp(30px, min(3.276vw, 5.8svh), 62.9px);
+  --body: clamp(15px, min(1.395vw, 2.45svh), 26.8px);
+  --small: clamp(13px, .9vw, 17px);
+  --mono: clamp(10.5px, .62vw, 12px);
+  --mega: clamp(44px, 6.9vw, 132px);
+  --stat: clamp(44px, min(4.6vw, 8svh), 88px);
+  --huge: clamp(64px, min(11.5vw, 20svh), 220px);
+  --radius: clamp(18px, 2.08vw, 40px);
+  --step: 80svh;
+  --ease: cubic-bezier(.22,1,.36,1); --ease-io: cubic-bezier(.65,0,.35,1); --ease-soft: cubic-bezier(.33,1,.68,1);
+  --font: Inter, "Helvetica Neue", Helvetica, -apple-system, system-ui, sans-serif;
+  --fmono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:clip}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0; background:var(--dark); color:#fff; font-family:var(--font); font-weight:500;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  letter-spacing:-.03em; line-height:1.14;
+}
+img,video{display:block; max-width:100%; height:auto}
+a{color:inherit; text-decoration:none}
+button{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; letter-spacing:inherit}
+p{margin:0}
+h1,h2,h3{margin:0; font-weight:500}
+::selection{background:var(--blue); color:#fff}
+:focus-visible{outline:2px solid var(--blue); outline-offset:4px}
+
+.light{background:var(--paper); color:#000}
+.dark{background:var(--dark); color:#fff}
+.muted{color:color-mix(in srgb, currentColor 25%, transparent)}
+.mono{font-family:var(--fmono); font-size:var(--mono); letter-spacing:.06em; text-transform:uppercase; font-weight:500}
+.grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); column-gap:var(--gut)}
+.display{font-size:var(--display); line-height:.86; letter-spacing:-.04em; text-wrap:balance}
+.body{font-size:var(--body); line-height:1.14; letter-spacing:-.03em}
+.body p + p{margin-top:1.14em}
+.body b{font-weight:600}
+.body ul{margin:1.14em 0; padding-left:1.1em}
+.body li{margin:.1em 0}
+.list{margin:0}
+.list dt{font-weight:600}
+.list dd{margin:0 0 1.14em}
+.list dd:last-child{margin-bottom:0}
+.list dd:empty{margin:0 0 .6em}
+
+/* ---------- fixed chrome ---------- */
+.progress{position:fixed; top:0; left:0; height:2px; width:100%; z-index:60; pointer-events:none; mix-blend-mode:difference}
+.progress i{display:block; height:100%; width:100%; background:#fff; transform-origin:0 50%; transform:scaleX(0)}
+.crumbs{
+  position:fixed; top:0; left:0; right:0; z-index:50; pointer-events:none;
+  padding:calc(var(--pad) * .68) var(--pad) 0; mix-blend-mode:difference; color:#fff;
+  font-size:var(--crumb); letter-spacing:-.03em; line-height:1.1;
+  display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); column-gap:var(--gut);
+}
+.crumbs .c0{display:flex; gap:clamp(24px, 10vw, 190px); white-space:nowrap} .crumbs .c0 > *{flex-shrink:0} /* project names are longer than 'Projects': never wrap the name */
+@media (max-width: 1499px){ .crumbs .c0{gap:max(24px, 10vw - 64px)} } /* tighter below 1500 so '/ Product Visualisation' clears the next crumb */
+.crumbs .c0 a{pointer-events:auto}
+.crumbs .seg{display:inline-block; white-space:nowrap; opacity:0; transform:translateY(-4px); transition:opacity .3s var(--ease-soft), transform .4s var(--ease)}
+.crumbs .seg.on{opacity:1; transform:none}
+.logo{
+  position:fixed; left:var(--pad); bottom:calc(var(--pad) - 2px); width:64px; height:64px; z-index:50;
+  mix-blend-mode:difference; color:#fff; transition:transform .7s var(--ease), opacity .45s var(--ease-io);
+}
+.logo svg{width:100%; height:100%; display:block; fill:currentColor; will-change:transform} /* spun by scroll in JS; hover spins the <a> */
+.logo:hover{transform:rotate(90deg)}
+.crumbs .c0 a{transition:opacity .45s var(--ease-io)}
+body.on-cover .crumbs .c0 a, body.on-cover .logo{opacity:0; pointer-events:none}
+.pager{
+  display:none !important; /* slide count + project name retired; dots now sit bottom right */
+  position:fixed; right:var(--pad); bottom:var(--pad); z-index:50; mix-blend-mode:difference; color:#fff;
+  pointer-events:none; text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+}
+.pager b{font-weight:500; font-variant-numeric:tabular-nums}
+.pager .name{opacity:.6}
+.dots{
+  position:fixed; right:calc(var(--pad) * .5); bottom:calc(var(--pad) - 2px); z-index:50; mix-blend-mode:difference;
+  display:flex; flex-direction:column; gap:7px; opacity:0; transition:opacity .45s var(--ease-io); pointer-events:none;
+}
+.dots.on{opacity:1; pointer-events:auto}
+.dots button{width:8px; height:8px; border-radius:50%; background:#fff; opacity:.3; transition:opacity .4s var(--ease), transform .45s var(--ease); display:block; padding:0}
+.dots button.on{opacity:1; transform:scale(1.35)}
+.dots button:hover{opacity:.8}
+.cur{
+  position:fixed; top:0; left:0; width:12px; height:12px; border-radius:50%; background:#fff; z-index:9999;
+  pointer-events:none; mix-blend-mode:difference; transform:translate(-50%,-50%); opacity:0;
+  transition:width .35s var(--ease), height .35s var(--ease), opacity .3s var(--ease-io);
+}
+.cur.big{width:64px; height:64px}
+.cur.show{opacity:1}
+@media (pointer:coarse){ .cur,.dots{display:none} }
+
+/* ---------- cover ---------- */
+#cover{height:100svh; min-height:560px; background:var(--dark); position:relative}
+.cover-card{position:absolute; inset:var(--pad); background:#000; border-radius:var(--radius); overflow:hidden; display:grid; place-items:center; cursor:crosshair}
+.lockup{text-align:center; font-size:clamp(1.9rem, 6.163vw, 132.295px); line-height:.873; letter-spacing:-.05em; font-weight:500; color:#fff; user-select:none; padding:2vh 2vw}
+.lockup .line{white-space:nowrap}
+.lockup .ch{display:inline-block; text-align:center; position:relative; white-space:pre}
+
+/* ---------- about ---------- */
+#about{min-height:100svh; padding:0 var(--pad)}
+#about .grid{min-height:100svh}
+.about-left{display:flex; flex-direction:column; padding-top:var(--stage-top); padding-bottom:calc(var(--pad) + 70px)}
+.about-left .display + .display{margin-top:1em}
+.skills{list-style:none; margin:auto 0 10svh; padding:2em 0 0; font-size:clamp(24.7px, min(2.1755vw, 3.8svh), 41.8px); line-height:.86; letter-spacing:-.04em}
+.skills li{color:color-mix(in srgb, #000 20%, transparent); transition:color .5s var(--ease); cursor:default}
+.skills li:hover{color:#000}
+.skills .w{display:inline-block; white-space:nowrap}
+.skills .ch{display:inline-block; white-space:pre}
+.about-photo{position:relative; background:#f2f2f2; overflow:hidden; min-height:100svh}
+.about-photo img{position:absolute; inset:-8% 0; width:100%; height:116%; object-fit:cover; object-position:62% 50%; will-change:transform}
+.about-copy{padding-top:calc(var(--pad) * .68 + var(--crumb) * 2)}
+
+/* ---------- index (Figma 304:132366 + Component 3 hover variants) ----------
+   Column centred; rows 132.438px Inter Medium, -0.06em, cap-trimmed to 96px, 37.55px apart.
+   Idle: every row at 10% white. Hover: that row 100%, the project's artwork appears on a
+   1920x1080 artboard scaled to the viewport (--k). Interactive Experiences also opens a
+   540px row above itself. All numbers below are Figma frame pixels.                    */
+#work{height:100svh; min-height:560px; overflow:hidden; position:relative; display:grid; align-items:center; justify-items:center; padding:0 var(--pad); --k:1}
+.index{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; align-items:center; gap:clamp(12px, 1.956vw, 60px); position:relative; z-index:2}
+.index a{display:block; font-size:clamp(44px, 6.897vw, 210px); line-height:1.02; letter-spacing:-.06em; text-align:center; white-space:nowrap; color:#fff; opacity:.1; transition:opacity .28s var(--ease-soft); text-box:trim-both cap alphabetic}
+@supports not (text-box: trim-both cap alphabetic){ .index a{line-height:.727} }
+#work[data-art="pv"] a[data-art="pv"], #work[data-art="ps"] a[data-art="ps"], #work[data-art="pay"] a[data-art="pay"], #work[data-art="ac"] a[data-art="ac"], #work[data-art="pm"] a[data-art="pm"], .index a:focus-visible{opacity:1}
+.index li.expand .inline-art{display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease)}
+.index li.expand.on .inline-art{grid-template-rows:1fr}
+.index li.expand .inline-art > div{overflow:hidden; position:relative; min-height:0}
+.index li.expand .inline-art > div::before{content:""; display:block; height:calc(540px * var(--k))}
+.index li.expand .inline-art img{position:absolute; left:50%; top:calc(151px * var(--k)); width:calc(1275px * var(--k)); max-width:none; transform:translateX(-50%) translateY(10px); opacity:0; transition:opacity .35s var(--ease-soft) .04s, transform .45s var(--ease) .04s}
+.index li.expand.on .inline-art img{opacity:1; transform:translateX(-50%)}
+.artboard{position:absolute; left:0; top:0; width:1920px; height:1080px; transform-origin:0 0; pointer-events:none; z-index:1}
+.art{position:absolute; inset:0; opacity:0; transition:opacity .3s var(--ease-soft), transform .45s var(--ease); transform:translateY(10px)}
+.art.on{opacity:1; transform:none}
+.art-pm{z-index:0} .art-pv,.art-ps,.art-pay,.art-ac{z-index:3}
+.artboard .art-pv, .artboard .art-ps, .artboard .art-pay, .artboard .art-ac{z-index:3}
+#work .index{z-index:2}
+.art-pm img{position:absolute; left:0; top:0; width:1920px; height:1080px; object-fit:cover}
+.art-pm{transform:scale(1.03)} .art-pm.on{transform:none}
+/* Product Visualisation — panel 769x1088 clipped at the right edge, three dispute cards, purple chips */
+.pvpanel{position:absolute; right:0; top:0; width:769px; height:1088px; overflow:clip}
+.art-pv{transform:translateX(30px)}
+.dcard{position:absolute; width:628.3px; height:640px; display:grid; place-items:center}
+.dcard .in{width:520.9px; height:536.6px; background:#fff; border-radius:24.4px; padding:48.8px; transform:rotate(var(--r)); display:flex; flex-direction:column; justify-content:space-between; color:#000; font-family:var(--font); letter-spacing:-.005em; box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.dcard .amt{font-size:48.8px; font-weight:600; line-height:73.2px; letter-spacing:-.3px}
+.dcard .pill{display:inline-block; align-self:flex-start; border:2px solid var(--fg); color:var(--fg); background:var(--bg); border-radius:60px; padding:2px 20px; font-size:28.13px; line-height:48.2px; font-weight:500; margin-top:8px; white-space:nowrap}
+.dcard .kv span{display:block; font-size:24.4px; color:#d7d3d3; line-height:36.6px; font-weight:600}
+.dcard .kv b{display:block; font-size:29.28px; line-height:36px; font-weight:600; white-space:nowrap}
+.dcard .kv2{display:flex} .dcard .kv2 .kv{width:216px}
+.chip{position:absolute; width:40.05px; height:40.05px; border-radius:50%; background:#9747ff; color:#fff; display:grid; place-items:center; font:700 25px/1 var(--fmono); padding-top:1px}
+/* Internal Apps — RFP card + merchant stickers */
+.rfp{position:absolute; left:1192.55px; top:554.82px; width:364px; height:346px; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.rfp img{position:absolute; left:50%; top:50%; width:385px; height:365px; transform:translate(-50%,-50%)}
+.stk{position:absolute; display:grid; place-items:center}
+.stk span{display:inline-block; background:var(--bg); color:var(--fg,#000); border-radius:67.2px; padding:13.92px 16.32px; font:700 63.57px/.7 var(--fmono); letter-spacing:-1.27px; text-transform:uppercase; white-space:nowrap; transform:rotate(var(--r,0deg)); box-shadow:0 20px 50px rgba(0,0,0,.3)}
+/* Interactive Experiences — Thrive host cut-out, bottom right */
+.art-pay img.guy{position:absolute; left:1351px; top:958px; width:639px}
+/* Figma Templates — two phones from the template file */
+.art-ac img.p1{position:absolute; left:0; top:715px; width:324px}
+.art-ac img.p2{position:absolute; left:1563px; top:0; width:227px}
+@media (pointer:coarse){ .index a{opacity:.55} .artboard{display:none} }
+@media (max-width: 900px){ #work{height:auto; min-height:100svh; padding:calc(var(--pad) * 2.4) var(--pad)} .index a{white-space:normal; text-wrap:balance} .index li.expand .inline-art{display:none} .artboard{display:none} }
+
+/* ---------- solo mode: a project opens on its own, nothing else on the scroll ----------
+   Default page = Cover, About, Projects, Thanks. body[data-solo="pv"] shows only #pv and its outro. */
+.deck{display:none}
+body[data-solo] .deck.solo{display:block}
+body[data-solo] #cover, body[data-solo] #about, body[data-solo] #work, body[data-solo] #end{display:none}
+.pager{display:none} body[data-solo] .pager{display:flex}
+.outro{min-height:100svh; display:grid; align-content:center; justify-items:center; gap:clamp(16px, 2.6vw, 40px); padding:calc(var(--pad) * 2) var(--pad); text-align:center; background:var(--dark); color:#fff}
+.outro:not(.solo){display:none}
+.outro .lbl{font-size:var(--crumb); letter-spacing:-.03em; opacity:.5}
+.outro .nextp{display:block; font-size:var(--mega); line-height:1.02; letter-spacing:-.06em; color:#fff; text-box:trim-both cap alphabetic; opacity:.92; transition:opacity .3s var(--ease-io), letter-spacing .5s var(--ease); white-space:nowrap}
+@supports not (text-box: trim-both cap alphabetic){ .outro .nextp{line-height:.727} }
+.outro .nextp:hover{opacity:1; letter-spacing:-.055em}
+.outro .back{font-size:var(--body); letter-spacing:-.03em; border-bottom:1px solid rgba(255,255,255,.3); padding-bottom:2px; margin-top:clamp(20px, 4vw, 64px); transition:border-color .3s}
+.outro .back:hover{border-color:#fff}
+@media (max-width: 900px){ #end .contact{flex-direction:column; align-items:flex-start; gap:4px} body[data-solo] .pager{display:none} .outro .nextp{white-space:normal; text-wrap:balance} }
+
+/* ============================================================
+   THE DECK ENGINE
+   .deck   tall scroll runway: n slides × --step, plus one screen for the stage
+   .stage  sticky 100svh viewport
+   .tl     a text layer: title block + up to three columns (+ an aside)
+   .slide  one Figma slide: text | overlay | full
+   ============================================================ */
+.deck{position:relative; height:calc(var(--n, 1) * var(--step) + 100svh)}
+.stage{position:sticky; top:0; height:100svh; overflow:hidden; background:var(--paper); color:#000}
+.stage[data-theme="dark"]{background:var(--dark); color:#fff}
+.stage[data-theme="black"]{background:#000; color:#fff}
+.tl{
+  position:absolute; inset:0; padding:var(--stage-top) var(--pad) 0;
+  display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); column-gap:var(--gut); align-content:start;
+  opacity:0; transition:opacity .3s var(--ease-io); pointer-events:none;
+}
+.stage[data-layer="a"] > .tl[data-layer="a"], .stage[data-layer="b"] > .tl[data-layer="b"]{opacity:1; pointer-events:auto; transition:opacity .55s var(--ease-io) .1s}
+.stage[data-kind="full"] > .tl[data-layer]{opacity:0 !important; pointer-events:none !important}
+.slide > .tl{opacity:1; pointer-events:auto}
+.tb{grid-column:1}
+.tb .display{display:block}
+.tb .sub{display:block; margin-top:calc(var(--display) * .72); color:color-mix(in srgb, currentColor 25%, transparent)}
+.col{opacity:0; transform:translateY(12px); transition:opacity .25s var(--ease-io), transform 0s linear .25s; max-height:calc(100svh - var(--stage-top) - var(--pad)); overflow:hidden}
+.col.c1{grid-column:2} .col.c2{grid-column:3} .col.c3{grid-column:4}
+.col.span2{grid-column:3 / span 2} .col.span3{grid-column:2 / span 3}
+.stage[data-cols="1"] .col.c1, .stage[data-cols="2"] .col.c1, .stage[data-cols="2"] .col.c2,
+.stage[data-cols="3"] .col.c1, .stage[data-cols="3"] .col.c2, .stage[data-cols="3"] .col.c3{opacity:1; transform:none; transition:opacity .45s var(--ease-soft), transform .6s var(--ease)}
+.col.c2{transition-delay:.04s} .col.c3{transition-delay:.08s}
+.aside{position:absolute; top:0; right:0; bottom:0; width:50%; background:var(--panel); display:grid; place-items:center; padding:9% 5% 6%; opacity:0; transform:translateX(14px); transition:opacity .6s var(--ease-io), transform 0s linear .6s; pointer-events:none} /* leaving: fade only, reset the travel once invisible */
+.aside img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain}
+.stage[data-cols="1"] .aside{opacity:1; transform:none; pointer-events:auto; transition:opacity .6s var(--ease-io), transform .8s var(--ease)}
+.dim{position:absolute; inset:0; background:#000; opacity:0; transition:opacity .6s var(--ease-io); pointer-events:none}
+.stage[data-kind="overlay"] .dim{opacity:var(--dim, 0)}
+.slide{position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .5s var(--ease-io), visibility 0s linear .5s}
+.slide.on{opacity:1; visibility:visible; transition:opacity .5s var(--ease-io)}
+.slide[data-kind="text"]{display:none}
+.slide .box{position:absolute; left:9%; right:9%; top:15%; bottom:15%; border-radius:var(--radius); overflow:hidden; background:#000; display:grid; place-items:center}
+.slide .box.white{background:#fff}
+.slide .box.panel{background:var(--panel)}
+.slide .box > img, .slide .box > video{width:100%; height:100%; object-fit:contain}
+.slide .box > img.cover, .slide .box > video.cover{object-fit:cover}
+.slide .box.wide{left:3%; right:3%; top:9%; bottom:6%}
+.slide figure{margin:0}
+[data-lightbox]{cursor:zoom-in}
+.enter{opacity:0; transform:translateY(14px) scale(.98); transition:opacity .3s var(--ease-io), transform 0s linear .3s} /* leaving: fade only, reset the travel once invisible */
+.slide.on .enter{opacity:1; transform:none; transition:opacity .6s var(--ease-soft), transform .8s var(--ease)}
+.slide.on .enter.d1{transition-delay:.06s} .slide.on .enter.d2{transition-delay:.12s} .slide.on .enter.d3{transition-delay:.18s}
+video{background:#000}
+.snd{position:absolute; left:50%; bottom:5%; transform:translateX(-50%); background:#fff; color:#000; border-radius:999px; padding:12px 18px 11px; font:500 12px/1 var(--fmono); letter-spacing:.06em; text-transform:uppercase; display:flex; align-items:center; gap:8px; z-index:2; box-shadow:0 10px 30px rgba(0,0,0,.4); transition:opacity .3s, transform .3s}
+.snd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--blue)}
+.snd.quiet{left:3%; right:auto; bottom:auto; top:5%; transform:none; background:rgba(0,0,0,.6); color:#fff; opacity:.75}
+.snd.quiet::before{background:#B3FF1A}
+.snd:hover{opacity:1}
+
+/* a Figma-coordinate frame inside a stage: children in 1920x1080 px, scaled by --k */
+.fr{position:absolute; left:0; top:50%; width:1920px; height:1080px; transform-origin:0 0; transform:translateY(calc(-540px * var(--k, 1))) scale(var(--k, 1))}
+.fr > *{position:absolute}
+.dcard.s{width:472.35px; height:481.19px; display:block}
+.dcard.s .in{position:absolute; left:0; top:0; transform-origin:0 0; transform:rotate(var(--r)) scale(.7518); box-shadow:none} /* Figma x/y = the rotated card's top-left corner; it turns about that corner */
+.chip.s{width:30.11px; height:30.11px; font-size:18.8px}
+@media (max-width: 900px){ .fr{transform:none; width:auto; height:auto; margin:0} .fr .cards{display:none} }
+
+/* pan */
+.pan{overflow:hidden; position:relative; cursor:move; touch-action:pan-y}
+.pan img{width:140%; max-width:none; height:auto; position:absolute; left:0; top:0; will-change:transform}
+.pan .pan-hint{position:absolute; left:16px; bottom:14px; color:#fff; mix-blend-mode:difference; pointer-events:none; opacity:.7}
+
+/* the scale (How it works) */
+.scale{display:grid; grid-template-rows:1fr auto; background:var(--panel); border-radius:var(--radius); overflow:hidden; height:100%}
+.scale-stage{position:relative; overflow:hidden; background:var(--panel); transition:background .8s var(--ease); min-height:0}
+.scale-stage[data-state="2"]{background:#000}
+.scale-stage figure{position:absolute; inset:0; display:grid; place-items:center; opacity:0; transform:scale(1.04); transition:opacity .8s var(--ease), transform 1.2s var(--ease); padding:5%}
+.scale-stage figure[data-i="1"]{padding:0}
+.scale-stage figure.on{opacity:1; transform:none}
+.scale-stage figure img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.scale-stage figure[data-i="0"] img{width:92%}
+.scale-stage figure[data-i="1"] img{position:absolute; inset:0; width:100%; height:100%; max-width:none; max-height:none; object-fit:cover; object-position:50% 46%; box-shadow:none; border-radius:0}
+.scale-stage figure[data-i="2"] img{width:100%; border-radius:0; box-shadow:none}
+.scale-ui{padding:clamp(14px, 1.6vw, 28px) clamp(18px, 2.6vw, 48px) clamp(18px, 2vw, 36px)}
+.scale-tabs{display:flex; justify-content:space-between; font-size:var(--body); font-weight:600; letter-spacing:-.03em}
+.scale-tabs button{color:color-mix(in srgb, #000 30%, transparent); transition:color .4s var(--ease); padding:4px 0}
+.scale-tabs button[aria-selected="true"]{color:#000}
+.scale-wedge{position:relative; height:clamp(24px, 2.8vw, 52px); margin-top:12px}
+.scale-wedge svg{position:absolute; inset:0; width:100%; height:100%}
+.scale-wedge .fillrect{transition:width .9s var(--ease)}
+.sub.hw{font-size:calc(var(--display) * .7); margin-top:calc(var(--display) * .55)}
+/* the Figma slider: panel at (502,55) 1432x1025 in the 1920 frame, left edge snapped to the column-2 grid line (--gl) so it lines up with the Problem/Ambition text; strip in component px, scaled by --sk */
+.sl-panel{--gl:calc(var(--pad) + (100% - 2 * var(--pad) - 3 * var(--gut)) / 4 + var(--gut)); position:absolute; left:var(--gl); top:5.12%; width:calc(100.75% - var(--gl)); height:95%; background:#f2f2f2; border-radius:var(--radius); overflow:hidden; cursor:grab; user-select:none; touch-action:pan-y; --sk:1; --p:0}
+.sl-panel:active{cursor:grabbing}
+.sl-strip{position:absolute; left:0; top:0; width:2763px; height:1025px; transform-origin:0 0; transform:scale(var(--sk)) translateX(calc(var(--p) * -1331px)); will-change:transform}
+.sl-strip.anim{transition:transform .75s var(--ease)}
+.sl-strip img{position:absolute; max-width:none; height:auto; pointer-events:none}
+.sl-strip img:first-child{border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.sl-labels span{position:absolute; top:778px; font:600 29px/35px var(--font); letter-spacing:-.03em; color:#000; opacity:.35; transition:opacity .4s var(--ease-io); cursor:pointer; padding:6px 10px; margin:-6px -10px}
+.sl-labels span.on{opacity:1}
+.sl-track{position:absolute; left:100.7px; top:833.7px; width:2631px; height:63px; overflow:visible}
+@media (max-width: 900px){ .sl-panel{position:static; width:100%; aspect-ratio:1432/1025; height:auto} }
+
+/* stats */
+.stats .year{display:block; margin-bottom:calc(var(--body) * .8)}
+.stat + .stat{margin-top:calc(var(--stat) * .42)}
+.stat .l{display:block; font-size:var(--body); letter-spacing:-.03em; margin-bottom:.12em}
+.stat .n{display:block; font-size:var(--stat); line-height:1; letter-spacing:-.05em; font-variant-numeric:tabular-nums}
+.huge{font-size:var(--huge); line-height:.9; letter-spacing:-.06em; font-variant-numeric:tabular-nums}
+
+/* feedback */
+.fbs{display:grid; gap:var(--gut); position:absolute; left:9%; right:9%; top:50%; translate:0 -50%; align-items:start}
+.fbs.two{grid-template-columns:1fr 1fr}
+.fbs.three{grid-template-columns:.9fr .9fr 1.4fr}
+.fb{
+  background:#fff; color:#000; border-radius:20px; padding:clamp(16px, 1.6vw, 26px); text-align:left; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.6); cursor:pointer; transition:transform .6s var(--ease); max-height:calc(100svh - var(--stage-top) - 80px);
+}
+.fb:hover{transform:translateY(-4px)}
+.fb header{display:flex; justify-content:space-between; gap:12px; align-items:baseline}
+.fb .fb-name{font-family:var(--fmono); font-size:clamp(13px, .95vw, 16px); letter-spacing:0; font-weight:500}
+.fb .fb-date{font-family:var(--fmono); font-size:var(--mono); letter-spacing:0; color:#888}
+.fb .op{font-size:var(--mono); color:#333; letter-spacing:0}
+.pills{display:flex; flex-wrap:wrap; gap:5px}
+.pills span{font-family:var(--fmono); font-size:var(--mono); letter-spacing:.02em; text-transform:uppercase; background:#AECBFF; color:#0B2A66; padding:4px 7px 3px; border-radius:3px; font-weight:500}
+.pills span.alt{background:#FFC98A; color:#5a3400}
+.fb .fb-text{font-size:clamp(13px, .95vw, 17px); line-height:1.4; letter-spacing:-.01em; font-weight:400; color:#222; display:-webkit-box; -webkit-line-clamp:var(--lines, 6); -webkit-box-orient:vertical; overflow:hidden}
+.fb .fb-text p + p{margin-top:.8em}
+.fb .more{margin-top:auto; font-family:var(--fmono); font-size:var(--mono); letter-spacing:.04em; color:#555; display:flex; gap:8px; align-items:center}
+.fb .more::before{content:""; width:10px; height:10px; border:1.5px solid currentColor; border-radius:2px; display:inline-block}
+.fbs.rows{grid-template-columns:1fr; left:12%; right:12%; gap:0}
+.fbs.rows .fb{border-radius:0; box-shadow:none}
+.fbs.rows .fb:first-child{border-radius:20px 20px 0 0}
+.fbs.rows .fb:last-child{border-radius:0 0 20px 20px; border-top:1px solid #eee}
+.fbs.rows{box-shadow:0 40px 80px -30px rgba(0,0,0,.6); border-radius:20px}
+.fb.row{display:grid; grid-template-columns:minmax(150px,.7fr) 1fr 2fr; gap:var(--gut); align-items:start}
+.fb.row header{flex-direction:column; align-items:flex-start; gap:4px}
+.fb.row .more{grid-column:3; margin-top:0}
+.fb.row:hover{transform:none}
+.fb-tag{position:absolute; left:9%; bottom:calc(var(--pad) * 1.4); font-size:var(--crumb); letter-spacing:-.03em; color:#fff}
+
+/* dialogs */
+dialog{border:0; padding:0; background:transparent; color:#000}
+dialog::backdrop{background:rgba(0,0,0,.72); backdrop-filter:blur(6px)}
+dialog[open]{animation:dlg-in .45s var(--ease) both} dialog[open]::backdrop{animation:bd-in .45s var(--ease-io) both}
+dialog.closing{animation:dlg-out .25s var(--ease-io) both} dialog.closing::backdrop{animation:bd-out .25s var(--ease-io) both}
+@keyframes dlg-in{from{opacity:0; transform:translateY(14px) scale(.985)}} @keyframes dlg-out{to{opacity:0; transform:translateY(8px) scale(.99)}}
+@keyframes bd-in{from{opacity:0}} @keyframes bd-out{to{opacity:0}}
+.veil{position:fixed; inset:0; background:var(--dark); opacity:0; pointer-events:none; z-index:80; transition:opacity .4s var(--ease-io)} .veil.on{opacity:1; transition-duration:.25s}
+.fbm{position:fixed; inset:0; margin:auto; width:min(1200px, 92vw); height:fit-content; max-height:calc(100svh - 2 * var(--pad)); overflow:auto; background:#fff; border-radius:22px; padding:clamp(24px, 3vw, 48px); box-shadow:0 60px 120px rgba(0,0,0,.5)}
+.fbm .x{position:sticky; float:right; top:0; font-size:28px; line-height:1; color:#333; padding:6px 10px; margin:-10px -14px 0 0}
+.fbm .fb-name{font-family:var(--fmono); font-size:clamp(22px, 2vw, 34px); letter-spacing:-.01em; display:block; margin-bottom:18px}
+.fbm .fb-date{font-family:var(--fmono); font-size:var(--mono); color:#888; display:block; margin:-10px 0 18px}
+.fbm .op{font-size:var(--small); color:#222; margin-bottom:10px; font-weight:500}
+.fbm .pills{margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid #eee}
+.fbm .fb-text{font-size:clamp(16px, 1.3vw, 24px); line-height:1.38; letter-spacing:-.015em; font-weight:400; color:#111}
+.fbm .fb-text p + p{margin-top:.9em}
+.fbm .close{margin-top:28px; font-family:var(--fmono); font-size:clamp(14px, 1vw, 18px); background:#f2f2f2; border-radius:12px; padding:14px 22px; letter-spacing:0; transition:background .3s}
+.fbm .close:hover{background:#e6e6e6}
+.lb{position:fixed; inset:0; width:100vw; height:100svh; margin:0; grid-template-rows:1fr auto; color:#fff; max-width:none; max-height:none}
+.lb[open]{display:grid}
+.lb .stage-lb{display:grid; place-items:center; padding:calc(var(--pad) * 1.8) var(--pad) var(--pad); min-height:0}
+.lb img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; border-radius:12px; box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.lb .bar{display:flex; justify-content:space-between; align-items:center; gap:var(--gut); padding:0 var(--pad) var(--pad); font-size:var(--small)}
+.lb .bar .c{opacity:.75; letter-spacing:-.02em}
+.lb .bar .btns{display:flex; gap:14px; align-items:center; white-space:nowrap}
+.lb .bar button{font-family:var(--fmono); font-size:var(--mono); letter-spacing:.06em; text-transform:uppercase; padding:10px 14px; border:1px solid rgba(255,255,255,.25); border-radius:999px; transition:background .3s}
+.lb .bar button:hover{background:rgba(255,255,255,.12)}
+.lb .x{position:absolute; right:var(--pad); top:var(--pad); font-size:30px; color:#fff; padding:6px 12px}
+
+/* slack */
+.slack{background:#1a1d21; color:#d1d2d3; border-radius:18px; padding:clamp(14px, 1.5vw, 24px); font-weight:400; letter-spacing:-.01em; font-size:clamp(12px, .92vw, 16px); line-height:1.4; box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.slack .msg{display:grid; grid-template-columns:36px 1fr; gap:10px; padding:8px 0}
+.slack .msg + .msg{border-top:1px solid rgba(255,255,255,.06)}
+.slack .av{width:36px; height:36px; border-radius:7px; background:#2d3138; display:grid; place-items:center; font-family:var(--fmono); font-size:11px; color:#fff; letter-spacing:0; overflow:hidden}
+.slack .av img{width:36px; height:36px; object-fit:cover}
+.slack .who{display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+.slack .who b{color:#fff; font-weight:600}
+.slack .who i{font-style:normal; font-size:.78em; color:#9a9b9d}
+.slack .who .vip{font-size:.6em; background:#fff; color:#1a1d21; border-radius:3px; padding:1px 4px; font-weight:600}
+.slack .at{background:#3b3d2a; color:#f2c744; border-radius:3px; padding:0 3px}
+.slack .reacts{display:flex; gap:5px; margin-top:7px; flex-wrap:wrap}
+.slack .reacts span{background:#2b2f36; border-radius:999px; padding:2px 8px; font-size:.78em; color:#c9d4ff}
+.slack .post p + p{margin-top:.5em}
+.slack .thread{color:#9a9b9d; font-size:.8em; margin:0 0 4px; display:flex; align-items:center; gap:10px}
+.slack .thread::after{content:""; flex:1; height:1px; background:rgba(255,255,255,.1)}
+.slack .vid{margin:0 0 10px; border-radius:10px; overflow:hidden; position:relative; background:#000}
+.slack .fn{font-size:.85em; color:#d1d2d3; padding:0 0 8px}
+.slack .vid video{width:100%; aspect-ratio:1920/1028}
+.pcard{background:#222; color:#fff; border-radius:18px; padding:14px; display:grid; gap:10px; box-shadow:0 40px 80px -30px rgba(0,0,0,.8)}
+.pcard img{width:100%; border-radius:10px; aspect-ratio:1; object-fit:cover}
+.pcard b{display:block; font-weight:600; font-size:clamp(13px, 1vw, 17px); letter-spacing:-.02em}
+.pcard span{display:block; font-size:clamp(11px, .8vw, 14px); color:#9a9b9d; font-weight:400; letter-spacing:-.01em}
+
+/* spinning badge */
+.spin{position:absolute; left:50%; top:50%; width:min(33vw, 640px, 60svh); aspect-ratio:1; transform:translate(-50%,-50%); pointer-events:none}
+.spin-inner{width:100%; height:100%; animation:spin 90s linear infinite}
+.spin-inner img{width:100%; height:100%; filter:drop-shadow(0 10px 30px rgba(0,0,0,.4))}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(20px); transition:opacity .8s var(--ease-io), transform .95s var(--ease); transition-delay:var(--d, 0ms)}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){ .rv,.enter,.col{opacity:1 !important; transform:none !important; transition:none !important} .spin-inner{animation:none} dialog[open], dialog[open]::backdrop, dialog.closing, dialog.closing::backdrop{animation:none} }
+
+/* end */
+#end{min-height:100svh; display:grid; grid-template-rows:auto 1fr auto; padding:calc(var(--pad) * .68) var(--pad) 0; background:#B3FF1A; color:#000; overflow:clip}
+/* the bottom block sticks to the viewport while the footer scrolls in, so the name is on screen for the whole stretch */
+#end .foot{position:sticky; bottom:0; display:grid; row-gap:calc(var(--pad) * 1.25); padding-bottom:calc(var(--pad) + 90px)}
+#end ::selection{background:#000; color:#B3FF1A}
+/* fixed chrome drops the difference blend while the orange footer is on screen */
+body.on-end .logo, body.on-end .pager, body.on-end .progress{mix-blend-mode:normal; color:#000}
+body.on-end .progress i{background:#000}
+body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(--ease-io)} .crumbs{transition:opacity .4s var(--ease-io)}
+#end .contact{display:flex; justify-content:space-between; align-items:baseline; gap:var(--gut); font-size:clamp(18px, 2.4vw, 46px); font-weight:500; letter-spacing:-.063em; line-height:1.2; white-space:nowrap}
+#end .contact a{color:inherit; text-decoration:none; border-bottom:2px solid transparent; transition:border-color .3s}
+#end .contact a:hover{border-color:#000}
+/* the name fills the width (JS fits the size), and runs the cover's scramble in black only */
+#end .name{font-weight:500; letter-spacing:-.063em; line-height:.82; white-space:nowrap; text-box:trim-both cap alphabetic; justify-self:start; cursor:crosshair; user-select:none; -webkit-user-select:none}
+#end .name .ch{display:inline-block; text-align:center; white-space:pre}
+#end .meta{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); column-gap:var(--gut); row-gap:4px; font-size:var(--crumb); line-height:1.05; letter-spacing:-.03em; align-items:end}
+#end .meta a{border-bottom:1px solid rgba(0,0,0,.35); padding-bottom:2px; transition:border-color .3s}
+#end .meta a:hover{border-color:#000}
+#end .meta .muted{color:color-mix(in srgb, #000 45%, transparent)}
+#end .meta .r{text-align:right}
+
+/* ============================================================
+   FLOW MODE (narrow screens): decks un-pin and read top to bottom
+   ============================================================ */
+@media (max-width: 900px){
+  .crumbs{grid-template-columns:1fr}
+  .crumbs .c0{gap:2em}
+  .crumbs .seg:not(#seg0){display:none}
+  .pager,.dots{display:none}
+  #about .grid{min-height:0; grid-template-columns:1fr}
+  .about-left{padding-top:calc(var(--pad) * 3); padding-bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:var(--gut)}
+  .skills{margin:0; padding:0; align-self:start}
+  .about-photo{min-height:0; aspect-ratio:4/5; margin-top:var(--gut)}
+  .about-photo img{position:absolute; inset:0; height:100%}
+  .about-copy{padding-top:0; margin:var(--gut) 0}
+  .deck{height:auto !important}
+  html,body{overflow-x:clip}
+  .stage{position:static; height:auto; overflow:visible; display:flex; flex-direction:column; padding:calc(var(--pad) * 2.2) 0 var(--pad); background:var(--paper) !important; color:#000 !important}
+  .tl, .slide > .tl{position:static; display:grid; grid-template-columns:1fr; gap:var(--gut); opacity:1 !important; pointer-events:auto !important; padding:var(--gut) var(--pad) 0}
+  .slide .tl > *{grid-column:auto !important}
+  .scale-wrap{margin-top:0 !important; height:auto !important; min-height:0 !important; aspect-ratio:3/4}
+  .tb .sub{margin-top:calc(var(--display) * .4)}
+  .col{opacity:1 !important; transform:none !important; grid-column:auto !important; max-height:none}
+  .aside{position:static; width:auto; opacity:1 !important; pointer-events:auto; padding:6%; border-radius:var(--radius); order:99}
+  .dim{display:none}
+  .slide{position:static; opacity:1 !important; visibility:visible !important; margin:var(--gut) var(--pad) 0}
+  .slide[data-kind="text"]{display:none}
+  .slide .box{position:static !important; inset:auto !important; aspect-ratio:16/9; background:#000 !important}
+  .slide .tl{padding:0}
+  .slide .m-stack{position:static !important; display:grid !important; grid-template-columns:1fr !important; grid-template-rows:none !important; gap:var(--gut)}
+  .slide .m-stack > *, .slide > img, .slide > video, .slide > .slack, .slide > .pcard{position:static !important; width:100% !important; height:auto !important; max-width:none !important; inset:auto !important; margin:0 !important}
+  .slide > img + *, .slide > .m-stack + *{margin-top:var(--gut) !important}
+  .spin{display:none}
+  .enter{opacity:1 !important; transform:none !important}
+  .fbs{position:static; translate:none; grid-template-columns:1fr !important; left:auto; right:auto}
+  .fb{max-height:none}
+  .fb-tag{display:none}
+  #end .big{white-space:normal; text-wrap:balance}
+  #end .meta{grid-template-columns:1fr 1fr}
+  #end .meta .r{text-align:left}
+}
+@media (max-width: 600px){
+  .about-left{grid-template-columns:1fr}
+  .lockup{font-size:clamp(1.6rem, 9.5vw, 3rem)}
+}
+</style>
+</head>
+<body class="on-cover">
+
+<!-- ================= fixed chrome ================= -->
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+<nav class="crumbs" aria-label="Where you are">
+  <div class="c0"><a href="#cover">Billy Newton</a><span class="seg" id="seg0"></span></div>
+  <span class="seg" id="seg1"></span><span class="seg" id="seg2"></span><span class="seg" id="seg3"></span>
+</nav>
+<a class="logo" href="#cover" aria-label="Back to the top"><svg viewBox="0 0 62.3522 62.3577" fill="currentColor" xmlns="http://www.w3.org/2000/svg" id="logoSvg"></svg></a>
+<div class="pager mono" aria-hidden="true"><b id="pagerNum">01 / 01</b><span class="name" id="pagerName"></span></div>
+<div class="dots" id="dots" aria-label="Slides in this project"></div>
+<div class="cur" id="cur" aria-hidden="true"></div>
+<div class="veil" id="veil" aria-hidden="true"></div>
+
+<!-- ================= 01 cover ================= -->
+<section id="cover" data-step data-crumbs="" data-title="Cover" aria-label="Cover">
+  <div class="cover-card" id="coverCard">
+    <h1 class="lockup" id="lockup" aria-label="Billy Newton. 31 years old. London, England. Design. AI Operations."></h1>
+  </div>
+</section>
+
+<!-- ================= 02 about ================= -->
+<section id="about" class="light" data-step data-crumbs="About me" data-title="About me">
+  <div class="grid">
+    <div class="about-left">
+      <div>
+        <h2 class="display rv">Billy<br>Newton</h2>
+        <p class="display rv" style="--d:120ms; color:color-mix(in srgb,#000 20%,transparent)">Senior<br>Designer</p>
+      </div>
+      <ul class="skills rv" style="--d:240ms" id="skills"><li>Visual Design</li><li>Brand Systems</li><li>Product</li><li>Motion</li><li>Ai Development</li></ul>
+    </div>
+    <div class="about-photo" data-parallax="0.12"><img src="img/about-photo.jpg" alt="Billy Newton working on a laptop in a black jacket, sat in an orange chair by a window" width="892" height="2160" fetchpriority="high"></div>
+    <div class="body about-copy rv" style="--d:160ms">
+      <p>I build scalable systems, AI-first tools, and automated workflows that help enterprise brands move fast without losing their craft.</p>
+      <p>My process starts slow, with pen and paper. I digest the noise, audit the friction, and isolate signals.</p>
+      <p>Then I move fast: building autonomously, shipping to production, and documenting the process so the whole team levels up. If I solve a problem once, I build a system so nobody has to solve it again.</p>
+    </div>
+    <div class="body about-copy rv" style="--d:280ms">
+      <p>At Checkout.com, I sit at the intersection of brand design, operations, and a product SME. When deals are worth billions, design isn't just decoration – it's trust and revenue.</p>
+      <p>I spot bottlenecks, build business cases, and use tools like Claude Code and Figma to turn months of manual effort into one-click workflows.</p>
+      <p>Beyond the screen: My work ethic comes from 20+ years on BMX and mountain bikes. DIY by nature, calm under pressure, and obsessed with progression. When I'm not building tools, I'm producing music, reading voraciously, or studying craft across architecture, interiors, fashion, and editorial print.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 contents ================= -->
+<section id="work" class="dark" data-step data-crumbs="Projects" data-title="Projects">
+  <div class="artboard" id="artboard" aria-hidden="true">
+    <div class="art art-pm" data-for="pm"><img src="img/hover-pm.jpg" alt="" width="2000" height="1125" loading="lazy"></div>
+    <div class="art art-pv" data-for="pv"><div class="pvpanel">
+      <div class="dcard" style="left:7.97px; top:-360px; --r:13deg"><div class="in"><div><div class="amt">13.10 EUR</div><div class="pill" style="--bg:#ffd2a5; --fg:#c65310">Evidence required</div></div><div class="kv"><span>Reason</span><b>Product/service not received</b></div><div class="kv"><span>Payment ID</span><b>pay_3xj4lkdju48sjihwwk...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>24.10.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+      <div class="dcard" style="left:193.74px; top:261.1px; --r:-13deg"><div class="in"><div><div class="amt">29.83 EUR</div><div class="pill" style="--bg:#f2f2f2; --fg:#424141">Evidence under review</div></div><div class="kv"><span>Reason</span><b>Credit not issued</b></div><div class="kv"><span>Payment ID</span><b>pay_obec3x4qxhuepnjs...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>02.10.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+      <div class="dcard" style="left:5.34px; top:874.33px; --r:13deg"><div class="in"><div><div class="amt">10.42 EUR</div><div class="pill" style="--bg:#bff3cd; --fg:#008a18">Dispute resolved</div></div><div class="kv"><span>Reason</span><b>Fraudulent</b></div><div class="kv"><span>Payment ID</span><b>pay_jaqawg4am3prent...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>12.09.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+      <i class="chip" style="left:88.11px; top:-293.25px">1</i><i class="chip" style="left:194.91px; top:438.34px">1</i><i class="chip" style="left:408.5px; top:-173.1px">2</i><i class="chip" style="left:587.4px; top:400.95px">2</i><i class="chip" style="left:58.73px; top:-167.73px">3</i><i class="chip" style="left:224.28px; top:574.5px">3</i><i class="chip" style="left:29.37px; top:-55.61px">4</i><i class="chip" style="left:250.97px; top:681.3px">4</i><i class="chip" style="left:2.68px; top:53.85px">5</i><i class="chip" style="left:272.34px; top:780.08px">5</i><i class="chip" style="left:232.29px; top:107.25px">6</i><i class="chip" style="left:85.43px; top:950.96px">1</i><i class="chip" style="left:405.83px; top:1071.11px">2</i><i class="chip" style="left:56.08px; top:1076.46px">3</i><i class="chip" style="left:26.7px; top:1188.6px">4</i><i class="chip" style="left:0px; top:1298.06px">5</i><i class="chip" style="left:229.61px; top:1351.46px">6</i><i class="chip" style="left:488.62px; top:729.37px">6</i>
+    </div></div>
+    <div class="art art-ps" data-for="ps">
+      <div class="rfp"><img src="img/hover-ps-card.jpg" alt="" width="770" height="730" loading="lazy"></div>
+      <div class="stk" style="left:1506.55px; top:211.82px; width:177.64px; height:71.84px"><span style="--bg:#77ba00; --fg:#000; --r:0deg">EBAY</span></div>
+      <div class="stk" style="left:217px; top:809.25px; width:263.75px; height:119.96px"><span style="--bg:#7f3fff; --fg:#fff; --r:-11.21deg">DABBLE</span></div>
+      <div class="stk" style="left:399.56px; top:643.72px; width:194.27px; height:118.04px"><span style="--bg:#ffd600; --fg:#000; --r:15.6deg">IKEA</span></div>
+      <div class="stk" style="left:1197.49px; top:178.61px; width:423.77px; height:139.47px"><span style="--bg:#fc5e00; --fg:#fff; --r:-9.46deg">SAINSBURY’S</span></div>
+      <div class="stk" style="left:1446.55px; top:753.82px; width:255.64px; height:71.84px"><span style="--bg:#ff0257; --fg:#fff; --r:0deg">AIRBNB</span></div>
+    </div>
+    <div class="art art-pay" data-for="pay"><img class="guy" src="img/hover-pay-guy.png" alt="" width="481" height="365" loading="lazy"></div>
+    <div class="art art-ac" data-for="ac"><img class="p1" src="img/hover-ac-phone1.png" alt="" width="648" height="714" loading="lazy"><img class="p2" src="img/hover-ac-phone2.png" alt="" width="682" height="1156" loading="lazy"></div>
+  </div>
+  <ul class="index" id="index">
+    <li><a href="#pv" data-art="pv">Product Visualisation</a></li>
+    <li><a href="#ps" data-art="ps">Internal Apps</a></li>
+    <li class="expand"><div class="inline-art"><div><img src="img/hover-pay-world.png" alt="" width="1793" height="442" loading="lazy"></div></div><a href="#pay" data-art="pay">Interactive Experiences</a></li>
+    <li><a href="#ac" data-art="ac">Figma Templates</a></li>
+    <li><a href="#pm" data-art="pm">Printed Matter</a></li>
+  </ul>
+</section>
+
+<!-- ================= PRODUCT VISUALISATION ================= -->
+<section class="deck" id="pv" data-title="Product Visualisation">
+  <div class="stage" data-theme="light">
+    <div class="tl" data-layer="a">
+      <div class="tb"><h2 class="display">Product<br>Visualisation</h2><span class="display sub">Overview</span></div>
+      <div class="col c1 body"><p>For my first two years at Checkout.com, the brand relied on stylized illustrations.</p><p>In enterprise fintech, payments equal trust, and abstract illustrations weren't giving billion-dollar merchants confidence in the actual platform.</p></div>
+      <div class="col c2 body"><dl class="list"><dt>Lead with the<br>real experience</dt><dd>Genuine product screens and flows, so the value is tangible and credible.</dd><dt>Reveal the<br>value sequence</dt><dd>Motion and layout show how the product delivers value, step by step.</dd><dt>Balance Clarity<br>with Expression</dt><dd>Clean, readable and scalable, but still contemporary and engaging.</dd><dt>Flexibility<br>and Focus</dt><dd>Flexes from stripped-back to expressive depending on message, surface and audience.</dd></dl></div>
+      <div class="col c3 body"><p>I audited 4,000 product screens to establish a repeatable "value sequence": lead with the real product interface to establish immediate clarity, then resolve into a focused, disruptive visual moment.</p><p>I documented and shared the system across the team, upskilling colleagues and standardizing how Checkout.com visualizes product value globally.</p></div>
+      <div class="aside"><img src="img/pv-problem.png" alt="The illustration era: trust list, decline list, fraudulent transaction overview, a revenue chart and a code snippet" width="1200" height="1418" loading="lazy" data-lightbox></div>
+    </div>
+    <div class="dim"></div>
+
+    <!-- 04 opener: Flow video -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|Product Visualisation">
+      <div class="box enter"><video src="video/pv-networktokens.mp4" poster="img/poster-pv-networktokens.jpg" muted loop playsinline preload="metadata" aria-label="Network tokens — the dashboard resolves into an expressive card"></video></div>
+    </div>
+    <!-- 05 how it works -->
+    <div class="slide" data-kind="full" data-theme="light" data-crumbs="Projects">
+      <div class="tl" style="padding-bottom:var(--pad); align-content:stretch">
+        <div class="tb enter">
+          <h2 class="display">Product<br>Visualisation</h2><span class="display sub hw">/ How it works</span>
+          <div class="body" style="margin-top:calc(var(--display) * .6)"><h3 style="font-weight:600">Three steps along one scale.<br>Full → Focused → Stylised</h3><p style="margin-top:1.14em">Our product visual language is grounded in our native experience.</p><p>We start by revealing the interface, using them as the foundation of the story.</p><p>From there, we isolate and recompose key propositional elements to guide attention.</p><p>Each sequence resolves in a bold, expressive configuration that feels disruptive, yet undeniably real.</p></div>
+        </div>
+        <div class="sl-panel enter d1" id="slider" aria-label="Full, Focused, Stylised — drag to move along the scale">
+          <div class="sl-strip">
+            <img src="img/slider-full.jpg" alt="Full: the Network tokens dashboard" width="1725" height="1023" style="left:115.75px; top:141.2px; width:934px">
+            <img src="img/slider-focused.png" alt="Focused: the order card and the magenta payment card" width="522" height="544" style="left:1195.2px; top:148.9px; width:522px">
+            <img src="img/slider-stylised.png" alt="Stylised: the card with a scrambled number among scattered digits" width="1067" height="736" style="left:1878.75px; top:145px; width:830px">
+            <div class="sl-labels"><span style="left:100.7px">Full</span><span style="left:1385.6px">Focused</span><span style="left:2637.3px">Stylised</span></div>
+            <svg class="sl-track" viewBox="0 0 2631 63" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="slClip"><rect id="slFill" x="0" y="0" width="1331" height="63"/></clipPath></defs><path d="M14 42 Q0 42 0 52 Q0 63 14 63 L2631 63 L2631 0 Z" fill="#fff"/><path d="M14 42 Q0 42 0 52 Q0 63 14 63 L2631 63 L2631 0 Z" fill="#186AFF" clip-path="url(#slClip)"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 06 problem / 07 ambition / 08 solution -->
+    <div class="slide" data-kind="text" data-layer="a" data-cols="1" data-crumbs="Projects|Problem"></div>
+    <div class="slide" data-kind="text" data-layer="a" data-cols="2" data-crumbs="Projects|Problem|Ambition"></div>
+    <div class="slide" data-kind="text" data-layer="a" data-cols="3" data-crumbs="Projects|Problem|Ambition|Solution"></div>
+    <!-- 09 the Figma prototype -->
+    <div class="slide" data-kind="overlay" data-dim=".5" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="box enter" style="left:8.5%; right:8.5%; top:10.3%; bottom:10.2%; border-radius:28px"><video class="cover" src="video/pv-proto.mp4" poster="img/poster-pv-proto.jpg" muted loop playsinline preload="metadata" aria-label="A walk through the Product Visualisation Figma prototype: overview, scale, network tokens, storyboard and example"></video></div>
+    </div>
+    <!-- 10 full → focused -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="fr m-stack">
+        <img class="enter" src="img/pv-table.jpg" alt="The disputes dashboard with six numbered callouts" width="1723" height="969" loading="lazy" data-lightbox style="left:251px; top:299px; width:861.3px; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,.35)">
+        <div class="cards enter d1" style="left:0; top:0; width:1920px; height:1080px">
+          <div class="dcard s" style="left:1270.73px; top:-188px; --r:13deg"><div class="in"><div><div class="amt">13.10 EUR</div><div class="pill" style="--bg:#ffd2a5; --fg:#c65310">Evidence required</div></div><div class="kv"><span>Reason</span><b>Product/service not received</b></div><div class="kv"><span>Payment ID</span><b>pay_3xj4lkdju48sjihwwk...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>24.10.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+          <div class="dcard s" style="left:1319.65px; top:367.04px; --r:-13deg"><div class="in"><div><div class="amt">29.83 EUR</div><div class="pill" style="--bg:#f2f2f2; --fg:#424141">Evidence under review</div></div><div class="kv"><span>Reason</span><b>Credit not issued</b></div><div class="kv"><span>Payment ID</span><b>pay_obec3x4qxhuepnjs...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>02.10.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+          <div class="dcard s" style="left:1268.77px; top:739.98px; --r:13deg"><div class="in"><div><div class="amt">10.42 EUR</div><div class="pill" style="--bg:#bff3cd; --fg:#008a18">Dispute resolved</div></div><div class="kv"><span>Reason</span><b>Fraudulent</b></div><div class="kv"><span>Payment ID</span><b>pay_jaqawg4am3prent...</b></div><div class="kv2"><div class="kv"><span>Initiated</span><b>12.09.25</b></div><div class="kv"><span>Updated</span><b>26.10.25</b></div></div></div></div>
+          <i class="chip s" style="left:1240.24px; top:-137.82px">1</i><i class="chip s" style="left:1320.54px; top:412.19px">1</i><i class="chip s" style="left:1481.12px; top:-47.49px">2</i><i class="chip s" style="left:1615.61px; top:384.09px">2</i><i class="chip s" style="left:1218.16px; top:-43.47px">3</i><i class="chip s" style="left:1342.62px; top:514.57px">3</i><i class="chip s" style="left:1196.08px; top:40.84px">4</i><i class="chip s" style="left:1362.69px; top:594.86px">4</i><i class="chip s" style="left:1176.01px; top:123.14px">5</i><i class="chip s" style="left:1378.75px; top:669.13px">5</i><i class="chip s" style="left:1348.64px; top:163.28px">6</i><i class="chip s" style="left:1541.34px; top:630.99px">6</i><i class="chip s" style="left:1238.23px; top:797.6px">1</i><i class="chip s" style="left:1479.11px; top:887.93px">2</i><i class="chip s" style="left:1216.15px; top:891.95px">3</i><i class="chip s" style="left:1194.07px; top:976.25px">4</i><i class="chip s" style="left:1174px; top:1058.55px">5</i><i class="chip s" style="left:1346.63px; top:1098.7px">6</i>
+        </div>
+      </div>
+    </div>
+    <!-- 11 disputes video -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="box enter"><video src="video/pv-disputes.mp4" poster="img/poster-pv-disputes.jpg" muted loop playsinline preload="metadata" aria-label="Disputes — the dashboard resolving into expressive cards"></video></div>
+    </div>
+    <!-- 12 ID verification video -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|Product Visualisation">
+      <div class="box enter"><video src="video/pv-idv.mp4" poster="img/poster-pv-idv.jpg" muted loop playsinline preload="metadata" aria-label="Identity verification — the product sequence"></video></div>
+    </div>
+    <!-- 13 Flow video -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|Product Visualisation">
+      <div class="box enter"><video src="video/pv-flow.mp4" poster="img/poster-pv-flow.jpg" muted loop playsinline preload="metadata" aria-label="Flow — the hosted checkout sequence"></video></div>
+    </div>
+    <!-- 14 the toolkit -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|Product Visualisation">
+      <div class="box wide pan enter" data-pan style="background:var(--dark)"><img src="img/pv-toolkit.jpg" alt="The Product Visualisation toolkit: overview, principles, product breakdown, structure, schematics and motion" width="2800" height="1409" loading="lazy"><span class="pan-hint mono">Move to explore the toolkit</span></div>
+    </div>
+    <!-- 15 peer feedback -->
+    <div class="slide" data-kind="overlay" data-dim=".8" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="fbs rows enter">
+        <article class="fb row" tabindex="0" role="button" aria-haspopup="dialog"><header><span class="fb-name">Ojonoka Wisdom Abu</span><span class="fb-date">Submitted 5th Jun</span></header><div class="pills"><span>Be the owner</span><span>Pace matters</span><span>Customer first</span><span>One team</span><span>Fundamentally positive</span></div><div class="fb-text"><p>Billy was absolutely outstanding during our product page redesign sprint, demonstrating immense ownership of our product visualisations. He proved that Pace Matters by proactively producing a staggering 190 high-quality images and product visualisations…</p></div><span class="more">Show full comment</span></article>
+        <article class="fb row" tabindex="0" role="button" aria-haspopup="dialog"><header><span class="fb-name">Ruxandra Spita</span><span class="fb-date">Submitted 3rd Jun</span></header><div class="pills"><span>Pace matters</span></div><div class="fb-text"><p>Massive shoutout for Billy for working on 190 images in less than 2 weeks for our revamp of the product pages. I really appreciate his support, input and quick work on this high priority project. Thank you, Billy !!</p></div><span class="more">Show full comment</span></article>
+      </div>
+      <span class="fb-tag">/ Peer feedback</span>
+    </div>
+  </div>
+</section>
+<section class="outro dark" data-step data-crumbs="Projects" data-title="Next" aria-hidden="true"><!-- end of project: scrolling in here returns to All projects (#work) --></section>
+
+<!-- ================= PROPOSAL STUDIO ================= -->
+<section class="deck" id="ps" data-title="Proposal Studio">
+  <div class="stage" data-theme="light">
+    <div class="tl" data-layer="a">
+      <div class="tb"><h2 class="display">Internal<br>Apps</h2><span class="display sub">Proposal<br>Studio</span></div>
+      <div class="col c1 body"><h3 style="font-weight:500">I built the tool to automate the conversion of completed RFP/RFI spreadsheets (.xlsx) into polished, client-facing Checkout.com proposals.</h3></div>
+      <div class="col c2 span2 body" style="font-size:calc(var(--body) * .86)">
+        <p><b>Reads the bid team's spreadsheet.</b> You drop in an answered RFP or RFI workbook (.xlsx). It sorts the content into headings, paragraphs, bullets, lists, numbered steps and tables, using the 9 patterns defined from 23 real bid workbooks. Unanswered questions are flagged as gaps rather than silently dropped. You review what was found before anything is created.</p>
+        <p><b>Lays it out on brand automatically.</b> Content flows into a fixed Checkout design system: A4 pages, consistent margins, headings, page numbers and running section titles. Long sections split across pages on their own. Questions are marked in the prospect's brand colour.</p>
+        <p><b>Personalises it to the prospect.</b> It adds the partner name and logo, a choice of cover style (dark hero, or the "WHERE / Partner / CHECKS / OUT" pill cover), a contents page and a matching back cover.</p>
+        <p><b>Exports the finished document.</b> It produces a branded PDF at a resolution you choose, a print version with selectable text, or a JSON file you can reopen and keep editing.</p>
+      </div>
+    </div>
+    <div class="tl" data-layer="b">
+      <div class="tb"><h2 class="display">Internal<br>Apps</h2><span class="display sub">Proposal<br>Studio</span></div>
+      <div class="col c1 body"><p>Bid teams answer RFPs in spreadsheets, but prospects expect a polished, branded document. Turning one into the other used to be weeks of manual design.</p><p>PlayStation in 2022 took about 80 hours.</p><p>Proposal Studio reads the answered workbook, works out what's a heading, paragraph, list or table, and lays it all out on brand automatically.</p><p>It even catches unanswered questions and names left over from reused templates. Review now takes under five minutes, and it's already been used on live bids.</p></div>
+      <div class="col c2 body"><dl class="list"><dt>Smart Parsing &amp; Gap Detection:</dt><dd>Ingests raw spreadsheet data into structured sections, tables, and lists based on proven workbook patterns, flagging unanswered questions for review before generation.</dd><dt>Automated Layout:</dt><dd>Automatically applies Checkout.com's A4 design system, handling pagination, running section headers, and prospect-colored question styling.</dd><dt>Client Personalization:</dt><dd>Adds prospect names, logos, matching covers (dark hero or pill style), and a generated table of contents.</dd><dt>Flexible Export:</dt><dd>Outputs publication-ready PDFs with selectable text.</dd></dl></div>
+      <div class="aside" style="padding:0; display:block"><img src="img/ps-pdfgrid.jpg" alt="Dozens of generated proposal pages in a grid: dark covers, contents, tables and diagrams" width="2400" height="1211" loading="lazy" data-lightbox style="position:absolute; left:7.8%; top:5.4%; width:242%; max-width:none; max-height:none; height:auto"></div>
+    </div>
+    <div class="dim"></div>
+
+    <!-- 16 what is -->
+    <div class="slide" data-kind="text" data-layer="a" data-cols="2" data-crumbs="Projects|What is Proposal Studio?|What it does"></div>
+    <!-- 17 the app -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|What is Proposal Studio?">
+      <div class="box enter" style="left:13.4%; right:13.4%; top:14.9%; bottom:15%; border-radius:28px"><video class="cover" src="video/ps-demo.mp4" poster="img/poster-ps-demo.jpg" muted loop playsinline preload="metadata" aria-label="Proposal Studio in use: importing the IKEA RFP workbook and generating WHERE IKEA CHECKS OUT"></video></div>
+    </div>
+    <!-- 18 the numbers -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects|What is Proposal Studio?">
+      <div class="m-stack" style="position:absolute; inset:var(--stage-top) var(--pad) var(--pad); display:grid; grid-template-rows:auto 1fr auto; align-items:start">
+        <div class="enter"><span class="huge"><span class="num" data-count="2500" data-prefix="£">£2,500</span></span><span class="huge" style="display:block; padding-left:clamp(40px, 15vw, 290px); margin-top:-.08em">per week</span></div>
+        <div class="enter d1" style="text-align:right; align-self:center"><span class="huge"><span class="num" data-count="5">5</span> minutes</span></div>
+        <div class="enter d2 body" style="text-align:center">RFP turn around 2022 vs now</div>
+      </div>
+    </div>
+    <!-- 19 problem -->
+    <div class="slide" data-kind="text" data-layer="b" data-cols="1" data-crumbs="Projects|Problem"></div>
+    <!-- 20 PlayStation pages -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem">
+      <div class="fr m-stack"><img class="enter" src="img/ps-playstation.png" alt="Three pages from the PlayStation proposal: supported countries and currencies, dispute process, product tooling" width="1920" height="868" loading="lazy" data-lightbox style="left:0; top:77px; width:1920px"></div>
+    </div>
+    <!-- 21 features -->
+    <div class="slide" data-kind="text" data-layer="b" data-cols="2" data-crumbs="Projects|Problem|Features"></div>
+    <!-- 22 the last mile -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Features">
+      <div class="box enter has-sound" style="left:13.4%; right:13.4%; top:15%; bottom:15%; border-radius:28px"><video src="video/ps-shoutout.mp4" poster="img/poster-ps-shoutout.jpg" data-sound playsinline preload="metadata" aria-label="David Lee on stage: Part Three, The Last Mile — completed workbook in, designed on-brand document out"></video><button class="snd" type="button" aria-label="Toggle sound">Tap for sound</button></div>
+      <div class="pcard enter d1" style="position:absolute; right:9%; top:9%; width:clamp(150px, 15vw, 240px)"><img src="img/ps-davidlee.png" alt="" width="578" height="554"><b>David Lee</b><span>Senior Director, Revenue Operations</span></div>
+    </div>
+    <!-- 23 peer feedback -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Features">
+      <div class="fbs three" style="left:3%; right:3%">
+        <article class="fb enter" tabindex="0" role="button" aria-haspopup="dialog" style="--lines:7"><header><span class="fb-name">Kevin Stanley-Dowd</span></header><div class="pills"><span>Better every day</span><span>Pace matters</span><span>One team</span></div><div class="fb-text"><p>Billy's recent work on Claude skills and AI development has been really impressive. He has continued to experiment and iterate with partners effectively, and this has resulted in tangible outputs that help us deliver on-brand outputs. Billy's attitude has also been exceptional, responding with energy to the challenge of getting these skills and tools out this week, and setting up a clinic to collaborate further with colleagues across Checkout. Billy should be proud of his brilliant work on this, and I'm excited to see what he achieves next.</p></div><span class="more">Show full comment</span></article>
+        <article class="fb enter d1" tabindex="0" role="button" aria-haspopup="dialog" style="--lines:9"><header><span class="fb-name">Ana Escobar</span></header><div class="pills"><span>Be the owner</span><span>No room for approximation</span><span>One team</span></div><div class="fb-text"><p>Billy led the Design workstream for the ABM Symphony project. This was an ambitious project with tight resources and timelines, and he was up for the challenge in all phases of the project (Athlete Mindset).</p><p>He kicked off our spike to assess the best tool for PDF assets, and started the testing and build with Gamma as one of the contenders. He was up for the challenge of building in a completely new environment, exploring its capacity and where the edges and limitations were. His feedback was key to determining why we shouldn't move forward with Gamma, and instead he showed the potential of what could be done with Figma (Be the Owner).</p><p>In addition, he worked directly with the project's engineering team, aligning on the Figma x Symphony integration, building the dynamic aspects of these assets, and brainstorming other solutions (Gemini-generated) to automate this workflow (One Team). Later in the project, his advice was key to polishing the output, aligning it with the ongoing campaign, and guiding the engineering team on how to make the automated workflows work best with Figma.</p><p>To make this project successful, we needed a library of assets that Symphony could pick from. He moved over 200 testimonial assets into Figma for this library using Claude within hours, expanding it from an initial total of 12 testimonials. This also showed how he can set ambitious goals and deliver them to unlock or boost others (Athlete Mindset, Be the Owner).</p></div><span class="more">Show full comment</span></article>
+        <article class="fb enter d2" tabindex="0" role="button" aria-haspopup="dialog" style="--lines:14"><header><span class="fb-name">Emma Knox</span></header><div class="pills"><span>Fundamentally positive</span><span>Pace matters</span><span>Run lean</span><span>Better every day</span><span>No room for approximation</span><span class="alt">Better every day</span></div><div class="fb-text"><p>Billy has been a massive driving force for the AI CoE on Project Symphony. He's brought a really positive energy to the team and has been consistently diligent in getting things done in an innovative way. His research into the matter significantly speeded up the project. It's been great working with him on this.</p><p>Billy brought a lot of genuine enthusiasm to Project Symphony. He didn't just execute tasks; he showed a real curiosity about the AI CoE's goals and looked for ways to push the project forward. Billy's energy throughout Project Symphony was also great. He brought a genuine enthusiasm to the team that made a real difference, especially when navigating the trickier parts of the project lifecycle. His positive outlook was highly valued by everyone involved. Billy demonstrated a strong commitment to execution on Symphony. He was detail-oriented and data-driven, ensuring his deliverables were precise and thorough. At the same time, he worked efficiently, helping the team optimise resources and focus purely on high-impact results without wasting time or effort.</p><p>Given how much passion Billy showed during this project, I would love to see him leaning into AI even further. It's obviously an area he genuinely enjoys and excels in, and continuing to build his expertise here will be a massive benefit to both his growth and the wider team.</p></div><span class="more">Show full comment</span></article>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="outro dark" data-step data-crumbs="Projects" data-title="Next" aria-hidden="true"><!-- end of project: scrolling in here returns to All projects (#work) --></section>
+
+<!-- ================= PAYMENTS STUDIO ================= -->
+<section class="deck" id="pay" data-title="Payments Studio">
+  <div class="stage" data-theme="light">
+    <div class="tl" data-layer="a">
+      <div class="tb"><h2 class="display">Interactive<br>Experiences</h2><span class="display sub">Payments<br>Studio</span></div>
+      <div class="col c1 span3 body"><p>The Payments Studio was Thrive Newport Beach's hands-on product experience space, where merchants could explore Checkout.com's product vision, try demos, and speak with product and technology experts in an informal, non-sales setting.<br>It made the product story tangible across six areas:</p><ul><li>Accept: payment interfaces, including Flow and Remember Me</li><li>Money movement: acquiring, payment methods and Issuing</li><li>Manage</li><li>Platforms</li><li>Optimize</li><li>What's Next: AI and agentic commerce themes / Roadmap 2027</li></ul><p>It was open around the mainstage programme and breaks on Wednesday and Thursday, staffed by product hosts running demos and capturing attendee discussion notes.</p></div>
+    </div>
+    <div class="tl" data-layer="b">
+      <div class="tb"><h2 class="display">Interactive<br>Experiences</h2><span class="display sub">Payments<br>Studio</span></div>
+      <div class="col c1 body"><p>At Thrive: Venice, Abu Dhabi and Commercial Kick-Off, every interactive experience was a hand-wired Figma prototype.</p><p>Every screen was drawn by hand, and every state was a separate frame. A country, a payment method or an "expanded card" each needed its own artboard. Every click was a noodle dragged by hand.</p><p>Change one screen and you recheck every connection. Figma can't connect to data. Content was pasted in, so the spreadsheet and the prototype were easy to unsync. Copy changes were manual and repeated. One wording fix meant editing every frame it appeared on. Only the person who wired the file could safely maintain it.</p><p>Change was slow, risky and hard to hand over.</p></div>
+      <div class="col c2 body"><dl class="list"><dt>Become a digital-first, innovative team where content comes from a source of truth.</dt><dd></dd><dt>PMM owns content<br>Design owns experience</dt><dd>PMM updates a row and the experience updates*</dd><dt>Systems instead<br>of screens</dt><dd>Generate the views rather than drawing them</dd><dt>Repeatable</dt><dd>The next event reuses the machine instead of starting from a blank Figma file</dd><dt>Ship something real</dt><dd>A live, kiosk-ready web experience on 75", (what the figma prototype is pretending to be)</dd></dl></div>
+      <div class="col c3 body"><p>One live, data-driven experience.</p><p>174 views, 774 buttons, 601 assets, 16,500 words.</p><dl class="list" style="margin-top:1.14em"><dt>Move:</dt><dd>41 countries, 71 payment methods and 13 entities, generated straight from the PMM spreadsheet.</dd><dt>Optimize:</dt><dd>50 views generated by a script. Each of the 473 copy amendments was a single edit, in a sheet.</dd><dt>What's next:</dt><dd>the 90-row roadmap (about 450 cells across 43 product areas) generated from the roadmap deck into 83 views.</dd><dt>The interactive layer<br>comes free with the code:</dt><dd>141 hover styles, 30 animations, 8 zoom levels.</dd></dl></div>
+      <div class="aside" style="padding:0; background:#f2f2f2; width:49.6%"><img src="img/pay-panel-26.jpg" alt="A Figma prototype: dozens of 75-inch screens connected by hundreds of blue prototype noodles" width="1904" height="2160" loading="lazy" data-lightbox style="width:100%; height:100%; max-height:none; object-fit:cover; object-position:0 0"></div>
+    </div>
+    <div class="dim"></div>
+
+    <!-- 24 what is -->
+    <div class="slide" data-kind="text" data-layer="a" data-cols="1" data-crumbs="Projects|What is the Payments Studio"></div>
+    <!-- 25 the room -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|What is the Payments Studio">
+      <div class="m-stack" style="position:absolute; left:9%; right:9%; top:8%; bottom:8%; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px">
+        <img class="enter" src="img/pay-photo-1.jpg" alt="The Payments Studio welcome desk, lit blue, in front of a wall of botanical screens" width="1480" height="966" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover; border-radius:18px">
+        <img class="enter d1" src="img/pay-photo-2.jpg" alt="Merchants gathered around a blue interactive table" width="1800" height="1130" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover; border-radius:18px">
+        <img class="enter d2" src="img/pay-photo-3.jpg" alt="A product host pointing at a 75-inch kiosk screen beside a blue PLAY phone box" width="1800" height="1144" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover; border-radius:18px">
+        <img class="enter d3" src="img/pay-photo-4.jpg" alt="Thrive stage: a panel of five speakers in front of the Thrive lettering" width="1484" height="936" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover; border-radius:18px">
+      </div>
+    </div>
+    <!-- 26 problem -->
+    <div class="slide" data-kind="text" data-layer="b" data-cols="1" data-crumbs="Projects|Problem"></div>
+    <!-- 27 flows planned by hand -->
+    <div class="slide" data-kind="overlay" data-dim="0" data-crumbs="Projects|Problem">
+      <img class="enter" src="img/pay-panel-27.jpg" alt="The prototype canvas dimmed, with the hand-drawn user flows for money transfer, person-to-person payments and funds disbursement on top" width="1904" height="2160" loading="lazy" data-lightbox style="position:absolute; left:50.4%; top:0; width:49.6%; height:100%; object-fit:cover; object-position:0 0">
+    </div>
+    <!-- 28 every state its own artboard -->
+    <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem">
+      <img src="img/pay-panel-27.jpg" alt="" width="1904" height="2160" loading="lazy" style="position:absolute; left:50.4%; top:0; width:49.6%; height:100%; object-fit:cover; object-position:0 0; filter:brightness(.55)">
+      <div class="fr m-stack"><img class="enter" src="img/pay-phones.png" alt="Three rows of fictional banking app screens — Walle, Pagoda and Solar — every state a separate frame" width="1985" height="1576" loading="lazy" data-lightbox style="left:464px; top:146px; width:992.3px"></div>
+    </div>
+    <!-- 29 ambition -->
+    <div class="slide" data-kind="text" data-layer="b" data-cols="2" data-crumbs="Projects|Problem|Ambition"></div>
+    <!-- 30 asset libraries -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition">
+      <figure class="box enter" style="background:transparent; left:7%; right:7%; top:30%; bottom:30%" data-lightbox><img src="img/pay-icons.png" alt="Asset libraries: brand icons, logos and payment method, bank, scheme and issuer marks" width="1645" height="435" loading="lazy"></figure>
+    </div>
+    <!-- 31 generated views -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition">
+      <figure class="box enter" style="background:transparent; left:12%; right:12%; top:11%; bottom:11%" data-lightbox><img src="img/pay-apac.png" alt="Generated kiosk views: Asia Pacific overview, payment methods, Alipay CN detail and merchant countries" width="1443" height="818" loading="lazy"></figure>
+    </div>
+    <!-- 32 the source of truth -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition">
+      <div class="box enter" style="left:13%; right:13%; top:10%; bottom:10%; border-radius:14px"><video src="video/pay-sheet.mp4" poster="img/poster-pay-sheet.jpg" muted loop playsinline preload="metadata" aria-label="The Payments Studio money-movement map, a Google Sheet, scrolling through regions, countries, entities and methods"></video></div>
+    </div>
+    <!-- 33 the live kiosk -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition">
+      <div class="box enter" style="left:10%; right:10%; top:6%; bottom:6%; border-radius:14px"><video src="video/pay-move.mp4" poster="img/poster-pay-move.jpg" muted loop playsinline preload="metadata" aria-label="Move — the live Payments Studio kiosk, generated from the spreadsheet"></video></div>
+    </div>
+    <!-- 34 solution -->
+    <div class="slide" data-kind="text" data-layer="b" data-cols="3" data-crumbs="Projects|Problem|Ambition|Solution"></div>
+    <!-- 35 impact -->
+    <div class="slide" data-kind="full" data-theme="light" data-crumbs="Projects|Impact">
+      <div class="tl">
+        <div class="tb enter"><h2 class="display">Interactive<br>Experiences</h2><span class="display sub">Payments<br>Studio</span></div>
+        <div class="stats enter d1" style="grid-column:2"><span class="year body">In 2026</span><div class="stat"><span class="l">Built in-house</span><span class="n"><span class="num" data-count="2">2</span> Weeks</span></div><div class="stat"><span class="l">Figma frames it replaces</span><span class="n"><span class="num" data-count="1000" data-prefix="~">~1000</span></span></div><div class="stat"><span class="l">Job roles</span><span class="n"><span class="num" data-count="2">2</span></span></div><div class="stat"><span class="l">Hand wired connections it replaces</span><span class="n"><span class="num" data-count="3500" data-prefix="~">~3,500</span></span></div></div>
+        <div class="stats enter d2" style="grid-column:3"><span class="year body">In 2024</span><div class="stat"><span class="l">Estimated agency equivalent</span><span class="n"><span class="num" data-count="572" data-prefix="$" data-suffix="K">$572K</span></span></div><div class="stat"><span class="l">In-house equivalent</span><span class="n"><span class="num" data-count="250" data-prefix="~£" data-suffix="K">~£250K</span></span></div><div class="stat"><span class="l">Job roles</span><span class="n"><span class="num" data-count="13">13</span></span></div><div class="stat"><span class="l">Time</span><span class="n"><span class="num" data-count="3.5" data-dec="1">3.5</span>months</span></div></div>
+      </div>
+    </div>
+    <!-- 36 peer feedback -->
+    <div class="slide" data-kind="overlay" data-dim=".85" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="fbs two" style="grid-template-columns:1fr 1.1fr">
+        <article class="fb enter" tabindex="0" role="button" aria-haspopup="dialog" style="--lines:12"><header><span class="op">Operating Principles:</span></header><div class="pills"><span>Athlete mindset</span><span>Pace matters</span><span>Run lean</span><span>No room for approximation</span><span>Better every day</span><span>Customer first</span><span class="alt">One team</span></div><div class="fb-text"><p>Billy has been an outstanding partner this year and has consistently raised the bar on both design quality and technical framework creation.</p><p>His pace of execution is exceptional, but what stands out most is that he builds assets that scale. The APM Spotlight template is a great example. It is intuitive, difficult to misuse, and has enabled me to move much faster through self-service. The same is true of the deep updates he made to the Flow and APM overview decks, which significantly improved the quality and readability of those resources.</p><p>Beyond delivery, Billy is constantly looking outside the business for inspiration. He regularly shares new tools, patterns, and ideas from across the web and industry. That curiosity and intrinsic motivation are a real gift to the team, because it means we always have a chance to be cutting edge.</p><p>His work always solves the immediate problem and increasingly raises the standard for technical aptitude.</p><p>One area where I'd encourage Billy to push even further is scaling the impact of his work beyond our immediate teams. For example, the markdown-driven diagram creation tool has the potential to benefit more than Solutions Engineering. PMs, TAMs, and other functions would get significant value from it as well. I think there is a real opportunity to package and promote these kinds of frameworks more broadly across the business, and I'd be glad to help make that happen.</p></div><span class="more">Show full comment</span></article>
+        <article class="fb enter d1" tabindex="0" role="button" aria-haspopup="dialog" style="--lines:12"><header><span class="op">Operating Principles:</span></header><div class="pills"><span>Be the owner</span><span>Customer first</span><span>Better every day</span><span>One team</span></div><div class="fb-text"><p>Billy consistently demonstrates a strong ownership mindset and a clear drive to go beyond the brief and proactively elevates the experience to create the 'wow' moment as well as the required output. Examples include: his work on the demos for Thrive, where he contributed to delivering or uplevling brand demos that helped achieve a near 100% satisfied/very satisfied rate among internal/external respondents to the payments studio. His design of an APM 1 Pager template, which provided AMs an asset that were excited and proud to send merchants, and helped the business overachieve on its APM TPV targets for the year. I've also noticed Billy actively sharing knowledge and insights in internal Slack groups, helping scale design thinking.</p><p>His approach significantly raised the quality of the output whenever we worked together and reduced pressure on the broader team during high-stakes moments, like Thrive. His willingness to contribute beyond his immediate remit makes collaboration smoother and creates a strong sense of shared ownership.</p></div><span class="more">Show full comment</span></article>
+      </div>
+      <span class="fb-tag">/ Peer feedback</span>
+    </div>
+  </div>
+</section>
+<section class="outro dark" data-step data-crumbs="Projects" data-title="Next" aria-hidden="true"><!-- end of project: scrolling in here returns to All projects (#work) --></section>
+
+<!-- ================= AGENTIC COMMERCE ================= -->
+<section class="deck" id="ac" data-title="Agentic Commerce">
+  <div class="stage" data-theme="light">
+    <div class="tl" data-layer="a">
+      <div class="tb"><h2 class="display">GTM Figma<br>Templates</h2><span class="display sub">Agentic<br>Commerce</span></div>
+      <div class="col c1 body"><p>Regional Go-To-Market (GTM) teams needed to personalize agentic commerce user flow screens for local pitches, but the process created a heavy design bottleneck:</p><dl class="list" style="margin-top:1.14em"><dt>Design Ticket Dependency:</dt><dd>Regional leads had to submit design tickets and wait days just to get localized variants back.</dd><dt>Repetitive Manual Work:</dt><dd>Creating a single personalized variant required 82 manual instance updates across 6 screens, taking roughly 240 minutes (4 hours) per variant.</dd></dl></div>
+      <div class="col c2 body"><p>Democratize how regional teams personalize agentic user flow screens by removing the design ticket bottleneck entirely.</p><p>The goal was to empower regional leads to self-serve – going from sourcing brand assets (via tools like CSS Peeper) to a finished, client-ready flow in the time it takes to grab a coffee.</p></div>
+      <div class="col c3 body"><p>I designed and rolled out a centralized GTM Figma Template built for instant, self-serve customization:</p><dl class="list" style="margin-top:1.14em"><dt>Single-Sync Architecture:</dt><dd>Replaced 82 manual instance updates with a master component system that syncs brand assets across all 6 user flow screens simultaneously.</dd><dt>Zero-Ticket Workflow:</dt><dd>Built clear onboarding instructions directly into the Figma file alongside a 1-minute walkthrough video, allowing non-designers to generate bespoke flows independently.</dd></dl></div>
+    </div>
+    <div class="dim"></div>
+
+    <!-- 37 opener -->
+    <div class="slide" data-kind="full" data-theme="black" data-crumbs="Projects">
+      <figure class="box wide enter" style="top:6%; bottom:4%; left:2%; right:2%" data-lightbox><img src="img/ac-flows.jpg" alt="Eleven phone screens of an agentic commerce flow: a chat request to buy a PS5, recommended consoles, product page, Argos checkout, Google Pay and order complete" width="2400" height="1350" loading="lazy"></figure>
+    </div>
+    <!-- 38 problem · ambition · solution -->
+    <div class="slide" data-kind="text" data-layer="a" data-cols="3" data-crumbs="Projects|Problem|Ambition|Solution"></div>
+    <!-- 39 the template (video: Untitled design (3)) -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="box enter" style="left:14%; right:14%; top:14%; bottom:14%; border-radius:14px"><video class="cover" src="video/ac-template.mp4" poster="img/poster-ac-template.jpg" muted loop playsinline preload="metadata" aria-label="A tour of the GTM Figma template: the Steps panel, the iHerb example and the master screens being personalised"></video></div>
+    </div>
+    <!-- 40 the response -->
+    <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="m-stack" style="position:absolute; left:9%; right:9%; top:12%; bottom:8%; display:grid; grid-template-columns:.62fr 1.5fr 1.15fr; gap:var(--gut); align-items:start">
+        <div class="pcard enter d1" style="align-self:end; margin-bottom:12%"><img src="img/ac-rory.png" alt="" width="700" height="640"><b>Rory O'Neill</b><span>Chief Marketing Officer · He / Him</span></div>
+        <div class="slack enter" style="padding-top:12px">
+          <div class="fn">Agentic User Flow - Example.mov ▾</div>
+          <div class="vid"><video src="video/ac-walkthrough.mp4" poster="img/poster-ac-walkthrough.jpg" muted loop playsinline preload="metadata" aria-label="The one-minute walkthrough: duplicating the template and personalising the agentic flow"></video></div>
+          <div class="reacts"><span>🙌 30</span><span>🚀 24</span><span>✨ 10</span><span>🧑‍🎤 9</span><span>🐻 2</span></div>
+          <div class="msg" style="border-top:0; margin-top:8px"><div class="av">RO</div><div class="post"><div class="who"><b>Rory O'Neill</b><span class="vip">VIP</span><i>Feb 12th at 11:20 AM</i></div><p>Excellent - great example of truly embedding AI to do our work, not just sit alongside us. Thank you for sharing <span class="at">@Billy Newton</span></p><div class="reacts"><span>🚀 2</span><span>💙 1</span><span>🚀 1</span></div></div></div>
+        </div>
+        <div class="m-stack" style="display:grid; gap:var(--gut)">
+          <div class="slack enter d2">
+            <div class="thread">7 replies</div>
+            <div class="msg"><div class="av">RO</div><div><div class="who"><b>Rory O'Neill</b><span class="vip">VIP</span><i>11:20 AM</i></div><p>Excellent - great example of truly embedding AI to do our work, not just sit alongside us. Thank you for sharing <span class="at">@Billy Newton</span></p></div></div>
+            <div class="msg"><div class="av">JF</div><div><div class="who"><b>Jules Francis</b><i>11:22 AM</i></div><p>95.8% increase in speed <span class="at">@Billy Newton</span> boom!! 🚀</p></div></div>
+            <div class="msg"><div class="av">KM</div><div><div class="who"><b>Katrina Merrick</b><i>11:27 AM</i></div><p>Thank yooouu <span class="at">@Billy Newton</span> !! 🚀 Looks so fab and will be so so helpful !</p></div></div>
+            <div class="msg"><div class="av">KS</div><div><div class="who"><b>Kevin Stanley-Dowd</b><span class="vip">VIP</span><i>11:34 AM</i></div><p>Great work <span class="at">@Billy Newton</span> 🙌</p></div></div>
+            <div class="msg"><div class="av">ZD</div><div><div class="who"><b>Zlatka Deliagova</b><i>11:51 AM</i></div><p>Consistently impressive, <span class="at">@Billy Newton</span>. Another strong delivery. 🚀</p></div></div>
+            <div class="msg"><div class="av">QH</div><div><div class="who"><b>Quinn Harker</b><i>1:20 PM</i></div><p>This is great! Thank you Billy! 🙌</p></div></div>
+            <div class="msg"><div class="av"><img src="img/ac-orrin.png" alt="" width="500" height="721" style="object-position:50% 22%"></div><div><div class="who"><b>Orrin Ward</b><i>4:17 PM</i></div><p>I love this! Awesome stuff mate.</p></div></div>
+          </div>
+          <div class="pcard enter d3" style="width:clamp(150px, 14vw, 230px); justify-self:end"><img src="img/ac-orrin.png" alt="" width="500" height="721" style="object-position:50% 22%"><b>Orrin Ward</b><span>Staff Product Design Operations · He/Him</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="outro dark" data-step data-crumbs="Projects" data-title="Next" aria-hidden="true"><!-- end of project: scrolling in here returns to All projects (#work) --></section>
+
+<!-- ================= PRINTED MATTER ================= -->
+<section class="deck" id="pm" data-title="Printed Matter">
+  <div class="stage" data-theme="light">
+    <div class="tl" data-layer="a">
+      <div class="tb"><h2 class="display">Printed<br>Matter</h2><span class="display sub">My Path<br>in Payments</span></div>
+      <div class="col c1 body"><p>A high-visibility print project was stalling due to inadequate freelance output and a budget that was about to be swallowed by global shipping costs.</p></div>
+      <div class="col c2 body"><p>Take ownership of both the editorial design and the physical supply chain to deliver a luxury, coffee-table-grade book without blowing the operational budget.</p></div>
+      <div class="col c3 body"><p>I stepped in to lead the design in-house, introducing bold, full-bleed imagery and customer-centric typography — and partnered directly with master printers Gavin Martin. Looking at the unit economics across 300 copies (4,000 internal sheets), I re-engineered the paper spec: dropping the internal stock weight by just 30gsm shaved a full metric ton (1,000 kg) off the total freight weight.</p><p>The massive savings on global shipping paid for the high-end finishing specs, turning a logistical constraint into a flagship physical artifact.</p></div>
+    </div>
+    <div class="dim"></div>
+
+    <!-- 41 opener -->
+    <div class="slide" data-kind="full" data-theme="dark" data-crumbs="Projects">
+      <figure class="box enter" style="top:12%; bottom:16%; left:7.5%; right:7.5%" data-lightbox><img class="cover" src="img/pm-hero.jpg" alt="Three copies of My Path in Payments, deep blue cloth with blind-embossed type, fanned on black" width="2200" height="1057" loading="lazy"></figure>
+      <div class="spin"><div class="spin-inner"><img src="img/circle-text.svg" alt="" width="640" height="639"></div></div>
+    </div>
+    <!-- 42 problem · ambition · solution -->
+    <div class="slide" data-kind="text" data-layer="a" data-cols="3" data-crumbs="Projects|Problem|Ambition|Solution"></div>
+    <!-- 43 the book, open -->
+    <div class="slide" data-kind="full" data-theme="light" data-crumbs="Projects|Problem|Ambition">
+      <div class="m-stack">
+        <img class="enter" src="img/pm-circular.jpg" alt="Open spread: Creating a customer-centric approach set in a circle, facing a portrait of Aleksandra Wasielewska" width="1600" height="2133" loading="lazy" data-lightbox style="position:absolute; left:-2%; top:8%; width:68%; height:53%; object-fit:cover; object-position:50% 38%">
+        <img class="enter d1" src="img/pm-contents.jpg" alt="The contents spread listing seasons one to four, with blue books behind" width="1600" height="2133" loading="lazy" data-lightbox style="position:absolute; left:18%; top:63%; width:48%; height:40%; object-fit:cover; object-position:50% 30%">
+        <video class="enter d2" src="video/pm-seasonone.mp4" poster="img/poster-pm-seasonone.jpg" muted loop playsinline preload="metadata" aria-label="Turning the Season One divider page" style="position:absolute; right:0; top:-4%; width:34%; height:108%; object-fit:cover"></video>
+      </div>
+    </div>
+    <!-- 44 stack + foreword -->
+    <div class="slide" data-kind="overlay" data-dim="0" data-crumbs="Projects|Problem|Ambition|Solution">
+      <div class="m-stack" style="position:absolute; left:16.5%; right:16.5%; top:10.5%; bottom:10.5%; display:grid; grid-template-columns:1fr 1fr">
+        <img class="enter" src="img/pm-stack.jpg" alt="A stack of eight copies on a dark grey table, spines embossed MY PATH IN PAYMENTS 2024" width="1400" height="1867" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover">
+        <img class="enter d1" src="img/pm-spread.jpg" alt="An open copy on the foreword spread by Rory O'Neill, held above more blue covers" width="1800" height="1350" loading="lazy" data-lightbox style="width:100%; height:100%; object-fit:cover">
+      </div>
+    </div>
+    <!-- 45 the shoot -->
+    <div class="slide" data-kind="full" data-theme="light" data-crumbs="Projects|Problem">
+      <figure class="box enter" style="left:0; right:0; top:10.5%; bottom:10.5%; border-radius:0; background:#fff" data-lightbox><img class="cover" src="img/pm-triptych.jpg" alt="The book shoot: softboxes over a black table, a stack of blue copies, and an open spread on Richard Haywood of Ocado Technology" width="1920" height="851" loading="lazy"></figure>
+    </div>
+    <!-- 46 Elena -->
+    <div class="slide" data-kind="overlay" data-dim="0" data-crumbs="Projects|Problem|Ambition">
+      <img class="enter" src="img/pm-elena.jpg" alt="Elena reading My Path in Payments on a sunny balcony" width="1600" height="1068" loading="lazy" data-lightbox style="position:absolute; left:18%; top:12%; width:72%; height:85%; object-fit:cover">
+      <div class="slack enter d1" style="position:absolute; right:6%; top:4%; width:clamp(220px, 23vw, 370px)">
+        <div class="thread" style="justify-content:center">October 7th, 2024</div>
+        <div class="msg" style="border-top:0"><div class="av">TT</div><div><div class="who"><b>Tam Trinh</b><i>2:14 PM</i></div><p>Hi Billy and Anushka, thanks for arranging a copy of the Path in Payments book 🙂</p><p style="margin-top:.5em">While my contact couldn't attend Thrive, she really appreciates us sending out a copy and sent this pic. Big thank you to the both of you!</p><div class="reacts"><span>💙 2</span><span>❤️ 2</span></div></div></div>
+      </div>
+    </div>
+    <!-- 47 closer -->
+    <div class="slide" data-kind="full" data-theme="light" data-crumbs="Projects">
+      <div class="tl"><div class="tb enter"><h2 class="display">Printed<br>Matter</h2><span class="display sub">My Path<br>in Payments</span></div></div>
+      <img class="enter d1" src="img/pm-bookwide.jpg" alt="Four copies of My Path in Payments fanned on black, the back cover listing Booking.com, HelloFresh, Wargaming, Allegro, Airbnb, Ocado Technology, Riverty, Upwork, Expedia Group, Sainsbury's, Gen and G2A" width="1378" height="1080" loading="lazy" data-lightbox style="position:absolute; left:26%; top:0; width:74%; height:100%; object-fit:cover">
+    </div>
+  </div>
+</section>
+<section class="outro dark" data-step data-crumbs="Projects" data-title="Next" aria-hidden="true"><!-- end of project: scrolling in here returns to All projects (#work) --></section>
+
+<!-- ================= end ================= -->
+<section id="end" data-step data-crumbs="" data-title="End">
+  <div class="contact rv"><span>Call me maybe?</span><a href="tel:+447534872153">+44 (0) 7534 872 153</a></div>
+  <div class="spacer" aria-hidden="true"></div>
+  <div class="foot">
+  <div class="name" id="endName" aria-label="Billy Newton">Billy Newton</div>
+  <div class="meta rv" style="--d:150ms">
+    <span>Billy Newton</span><span>/ Senior Designer</span><span>/ London, England</span><span class="r"><a href="#cover">Back to the top ↑</a></span>
+    <span class="muted">Design · Ai Operations</span><span class="muted">Checkout.com</span><span class="muted">2027</span><span class="r muted">Built as a living portfolio</span>
+  </div>
+  </div>
+</section>
+
+<!-- ================= dialogs ================= -->
+<dialog class="fbm" id="fbm" aria-label="Peer feedback"><button class="x" data-close aria-label="Close">×</button><div id="fbmBody"></div><button class="close" data-close>Close</button></dialog>
+<dialog class="lb" id="lb" aria-label="Image viewer">
+  <button class="x" data-close aria-label="Close">×</button>
+  <div class="stage-lb"><img id="lbImg" alt=""></div>
+  <div class="bar"><span class="c" id="lbCap"></span><span class="btns"><span class="mono" id="lbIdx" style="opacity:.6"></span><button data-prev>Prev</button><button data-next>Next</button></span></div>
+</dialog>
+
+<script>
+/* ============================================================ 0. helpers */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine    = matchMedia('(pointer: fine)').matches;
+const flowMQ  = matchMedia('(max-width: 900px)');
+/* dialogs leave with their animation instead of vanishing; Escape goes through the same path */
+function softClose(d){ if (!d.open || d.classList.contains('closing')) return; if (reduced){ d.close(); return; } d.classList.add('closing'); let done = false; const fin = () => { if (done) return; done = true; d.classList.remove('closing'); if (d.open) d.close(); }; d.addEventListener('animationend', fin, {once:true}); setTimeout(fin, 320); }
+function softDialog(d){ d.addEventListener('cancel', e => { e.preventDefault(); softClose(d); }); }
+const clamp01 = v => v < 0 ? 0 : v > 1 ? 1 : v;
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/* logo mark (Figma group 1000007368) */
+$('#logoSvg').innerHTML = `<path d="M4.78529 46.219C5.59006 46.219 6.24245 45.5666 6.24245 44.7619C6.24245 43.9571 5.59006 43.3047 4.78529 43.3047C3.98052 43.3047 3.32812 43.9571 3.32812 44.7619C3.32812 45.5666 3.98052 46.219 4.78529 46.219Z"/><path d="M16.9995 58.8114C17.6334 58.8114 18.1474 58.2975 18.1474 57.6635C18.1474 57.0296 17.6334 56.5156 16.9995 56.5156C16.3655 56.5156 15.8516 57.0296 15.8516 57.6635C15.8516 58.2975 16.3655 58.8114 16.9995 58.8114Z"/><path d="M21.9313 60.8939C22.299 60.8939 22.597 60.5958 22.597 60.2282C22.597 59.8605 22.299 59.5625 21.9313 59.5625C21.5637 59.5625 21.2656 59.8605 21.2656 60.2282C21.2656 60.5958 21.5637 60.8939 21.9313 60.8939Z"/><path d="M1.79787 30.2051C2.7908 30.2051 3.59574 29.4002 3.59574 28.4072C3.59574 27.4143 2.7908 26.6094 1.79787 26.6094C0.804932 26.6094 0 27.4143 0 28.4072C0 29.4002 0.804932 30.2051 1.79787 30.2051Z"/><path d="M3.63213 37.2877C5.61221 37.2877 7.21738 35.6825 7.21738 33.7024C7.21738 31.7224 5.61221 30.1172 3.63213 30.1172C1.65205 30.1172 0.046875 31.7224 0.046875 33.7024C0.046875 35.6825 1.65205 37.2877 3.63213 37.2877Z"/><path d="M11.919 48.1662C15.0715 48.1662 17.6271 45.6106 17.6271 42.4581C17.6271 39.3056 15.0715 36.75 11.919 36.75C8.76654 36.75 6.21094 39.3056 6.21094 42.4581C6.21094 45.6106 8.76654 48.1662 11.919 48.1662Z"/><path d="M14.8997 48.1119C17.5022 48.1119 19.6119 46.0022 19.6119 43.3997C19.6119 40.7972 17.5022 38.6875 14.8997 38.6875C12.2972 38.6875 10.1875 40.7972 10.1875 43.3997C10.1875 46.0022 12.2972 48.1119 14.8997 48.1119Z"/><path d="M19.1483 57.5621C22.0778 57.5621 24.4527 55.1872 24.4527 52.2576C24.4527 49.328 22.0778 46.9531 19.1483 46.9531C16.2187 46.9531 13.8438 49.328 13.8438 52.2576C13.8438 55.1872 16.2187 57.5621 19.1483 57.5621Z"/><path d="M27.9019 60.6086C31.1529 60.6086 33.7883 57.9732 33.7883 54.7223C33.7883 51.4713 31.1529 48.8359 27.9019 48.8359C24.651 48.8359 22.0156 51.4713 22.0156 54.7223C22.0156 57.9732 24.651 60.6086 27.9019 60.6086Z"/><path d="M32.5681 62.3003C33.5119 62.3003 34.2769 61.5353 34.2769 60.5916C34.2769 59.6479 33.5119 58.8828 32.5681 58.8828C31.6244 58.8828 30.8594 59.6479 30.8594 60.5916C30.8594 61.5353 31.6244 62.3003 32.5681 62.3003Z"/><path d="M5.57317 30.1229C8.3146 30.1229 10.537 27.9005 10.537 25.1591C10.537 22.4177 8.3146 20.1953 5.57317 20.1953C2.83174 20.1953 0.609375 22.4177 0.609375 25.1591C0.609375 27.9005 2.83174 30.1229 5.57317 30.1229Z"/><path d="M11.502 38.5666C14.8514 38.5666 17.5666 35.8514 17.5666 32.502C17.5666 29.1527 14.8514 26.4375 11.502 26.4375C8.15268 26.4375 5.4375 29.1527 5.4375 32.502C5.4375 35.8514 8.15268 38.5666 11.502 38.5666Z"/><path d="M14.6971 40.1051C16.4369 40.1051 17.8473 38.6947 17.8473 36.9549C17.8473 35.2151 16.4369 33.8047 14.6971 33.8047C12.9573 33.8047 11.5469 35.2151 11.5469 36.9549C11.5469 38.6947 12.9573 40.1051 14.6971 40.1051Z"/><path d="M31.7839 55.1929C34.7367 55.1929 37.1304 52.7992 37.1304 49.8464C37.1304 46.8937 34.7367 44.5 31.7839 44.5C28.8312 44.5 26.4375 46.8937 26.4375 49.8464C26.4375 52.7992 28.8312 55.1929 31.7839 55.1929Z"/><path d="M37.3351 62.3577C39.5265 62.3577 41.303 60.5812 41.303 58.3898C41.303 56.1984 39.5265 54.4219 37.3351 54.4219C35.1437 54.4219 33.3672 56.1984 33.3672 58.3898C33.3672 60.5812 35.1437 62.3577 37.3351 62.3577Z"/><path d="M9.56039 23.6911C13.0024 23.6911 15.7927 20.9008 15.7927 17.4588C15.7927 14.0168 13.0024 11.2266 9.56039 11.2266C6.1184 11.2266 3.32812 14.0168 3.32812 17.4588C3.32812 20.9008 6.1184 23.6911 9.56039 23.6911Z"/><path d="M16.4283 26.5284C17.2128 26.5284 17.8488 25.8925 17.8488 25.108C17.8488 24.3235 17.2128 23.6875 16.4283 23.6875C15.6438 23.6875 15.0078 24.3235 15.0078 25.108C15.0078 25.8925 15.6438 26.5284 16.4283 26.5284Z"/><path d="M38.3821 45.1547C38.77 45.1547 39.0844 44.8403 39.0844 44.4524C39.0844 44.0645 38.77 43.75 38.3821 43.75C37.9941 43.75 37.6797 44.0645 37.6797 44.4524C37.6797 44.8403 37.9941 45.1547 38.3821 45.1547Z"/><path d="M41.3152 59.2242C44.7254 59.2242 47.4898 56.4597 47.4898 53.0496C47.4898 49.6395 44.7254 46.875 41.3152 46.875C37.9051 46.875 35.1406 49.6395 35.1406 53.0496C35.1406 56.4597 37.9051 59.2242 41.3152 59.2242Z"/><path d="M10.7613 10.5539C11.294 10.5539 11.7258 10.1221 11.7258 9.58945C11.7258 9.0568 11.294 8.625 10.7613 8.625C10.2287 8.625 9.79688 9.0568 9.79688 9.58945C9.79688 10.1221 10.2287 10.5539 10.7613 10.5539Z"/><path d="M14.2234 22.2281C17.3499 22.2281 19.8844 19.6936 19.8844 16.5672C19.8844 13.4407 17.3499 10.9062 14.2234 10.9062C11.097 10.9062 8.5625 13.4407 8.5625 16.5672C8.5625 19.6936 11.097 22.2281 14.2234 22.2281Z"/><path d="M18.5245 23.1896C21.1096 23.1896 23.2052 21.094 23.2052 18.5089C23.2052 15.9238 21.1096 13.8281 18.5245 13.8281C15.9394 13.8281 13.8438 15.9238 13.8438 18.5089C13.8438 21.094 15.9394 23.1896 18.5245 23.1896Z"/><path d="M42.8975 42.8576C43.7255 42.8576 44.3966 42.1864 44.3966 41.3585C44.3966 40.5305 43.7255 39.8594 42.8975 39.8594C42.0696 39.8594 41.3984 40.5305 41.3984 41.3585C41.3984 42.1864 42.0696 42.8576 42.8975 42.8576Z"/><path d="M45.5715 52.9711C48.394 52.9711 50.6821 50.683 50.6821 47.8606C50.6821 45.0381 48.394 42.75 45.5715 42.75C42.749 42.75 40.4609 45.0381 40.4609 47.8606C40.4609 50.683 42.749 52.9711 45.5715 52.9711Z"/><path d="M53.0615 52.834C53.2034 52.834 53.3184 52.719 53.3184 52.5772C53.3184 52.4353 53.2034 52.3203 53.0615 52.3203C52.9197 52.3203 52.8047 52.4353 52.8047 52.5772C52.8047 52.719 52.9197 52.834 53.0615 52.834Z"/><path d="M19.5726 12.9889C22.4906 12.9889 24.8561 10.6234 24.8561 7.7054C24.8561 4.78739 22.4906 2.42188 19.5726 2.42188C16.6546 2.42188 14.2891 4.78739 14.2891 7.7054C14.2891 10.6234 16.6546 12.9889 19.5726 12.9889Z"/><path d="M27.2713 17.9566C28.4437 17.9566 29.3941 17.0062 29.3941 15.8338C29.3941 14.6614 28.4437 13.7109 27.2713 13.7109C26.0989 13.7109 25.1484 14.6614 25.1484 15.8338C25.1484 17.0062 26.0989 17.9566 27.2713 17.9566Z"/><path d="M46.2437 34.5578C46.8314 34.5578 47.3078 34.0814 47.3078 33.4937C47.3078 32.9061 46.8314 32.4297 46.2437 32.4297C45.6561 32.4297 45.1797 32.9061 45.1797 33.4937C45.1797 34.0814 45.6561 34.5578 46.2437 34.5578Z"/><path d="M51.3373 46.4714C54.6258 46.4714 57.2917 43.8055 57.2917 40.517C57.2917 37.2284 54.6258 34.5625 51.3373 34.5625C48.0487 34.5625 45.3828 37.2284 45.3828 40.517C45.3828 43.8055 48.0487 46.4714 51.3373 46.4714Z"/><path d="M57.5154 45.7965C58.4041 45.7965 59.1246 45.076 59.1246 44.1873C59.1246 43.2986 58.4041 42.5781 57.5154 42.5781C56.6267 42.5781 55.9062 43.2986 55.9062 44.1873C55.9062 45.076 56.6267 45.7965 57.5154 45.7965Z"/><path d="M23.4454 11.5315C26.6298 11.5315 29.2112 8.9501 29.2112 5.76576C29.2112 2.58142 26.6298 0 23.4454 0C20.2611 0 17.6797 2.58142 17.6797 5.76576C17.6797 8.9501 20.2611 11.5315 23.4454 11.5315Z"/><path d="M32.2023 14.5686C35.5285 14.5686 38.2249 11.8722 38.2249 8.54603C38.2249 5.21985 35.5285 2.52344 32.2023 2.52344C28.8761 2.52344 26.1797 5.21985 26.1797 8.54603C26.1797 11.8722 28.8761 14.5686 32.2023 14.5686Z"/><path d="M36.0744 18.1567C37.794 18.1567 39.188 16.7627 39.188 15.0432C39.188 13.3236 37.794 11.9297 36.0744 11.9297C34.3549 11.9297 32.9609 13.3236 32.9609 15.0432C32.9609 16.7627 34.3549 18.1567 36.0744 18.1567Z"/><path d="M42.8904 22.726C45.1339 22.726 46.9526 20.9073 46.9526 18.6638C46.9526 16.4203 45.1339 14.6016 42.8904 14.6016C40.6469 14.6016 38.8281 16.4203 38.8281 18.6638C38.8281 20.9073 40.6469 22.726 42.8904 22.726Z"/><path d="M44.4166 25.8722C44.6337 25.8722 44.8097 25.6962 44.8097 25.4791C44.8097 25.2619 44.6337 25.0859 44.4166 25.0859C44.1994 25.0859 44.0234 25.2619 44.0234 25.4791C44.0234 25.6962 44.1994 25.8722 44.4166 25.8722Z"/><path d="M49.8651 36.7615C53.0871 36.7615 55.699 34.1496 55.699 30.9276C55.699 27.7057 53.0871 25.0938 49.8651 25.0938C46.6432 25.0938 44.0312 27.7057 44.0312 30.9276C44.0312 34.1496 46.6432 36.7615 49.8651 36.7615Z"/><path d="M58.1956 37.8132C60.4913 37.8132 62.3522 35.9522 62.3522 33.6566C62.3522 31.361 60.4913 29.5 58.1956 29.5C55.9 29.5 54.0391 31.361 54.0391 33.6566C54.0391 35.9522 55.9 37.8132 58.1956 37.8132Z"/><path d="M34.5592 10.1106C37.2196 10.1106 39.3762 7.95397 39.3762 5.29359C39.3762 2.63322 37.2196 0.476562 34.5592 0.476562C31.8988 0.476562 29.7422 2.63322 29.7422 5.29359C29.7422 7.95397 31.8988 10.1106 34.5592 10.1106Z"/><path d="M40.2728 16.069C43.6164 16.069 46.3268 13.3585 46.3268 10.015C46.3268 6.67143 43.6164 3.96094 40.2728 3.96094C36.9292 3.96094 34.2188 6.67143 34.2188 10.015C34.2188 13.3585 36.9292 16.069 40.2728 16.069Z"/><path d="M45.2028 20.2102C48.3437 20.2102 50.8899 17.664 50.8899 14.5231C50.8899 11.3822 48.3437 8.83594 45.2028 8.83594C42.0618 8.83594 39.5156 11.3822 39.5156 14.5231C39.5156 17.664 42.0618 20.2102 45.2028 20.2102Z"/><path d="M51.1291 23.9066C54.4321 23.9066 57.1098 21.229 57.1098 17.926C57.1098 14.6229 54.4321 11.9453 51.1291 11.9453C47.8261 11.9453 45.1484 14.6229 45.1484 17.926C45.1484 21.229 47.8261 23.9066 51.1291 23.9066Z"/><path d="M58.3069 30.8325C60.3101 30.8325 61.9341 29.2086 61.9341 27.2053C61.9341 25.2021 60.3101 23.5781 58.3069 23.5781C56.3036 23.5781 54.6797 25.2021 54.6797 27.2053C54.6797 29.2086 56.3036 30.8325 58.3069 30.8325Z"/><path d="M61.0317 31.1337C61.5238 31.1337 61.9228 30.7348 61.9228 30.2426C61.9228 29.7505 61.5238 29.3516 61.0317 29.3516C60.5396 29.3516 60.1406 29.7505 60.1406 30.2426C60.1406 30.7348 60.5396 31.1337 61.0317 31.1337Z"/><path d="M53.9014 11.7951C54.162 11.7951 54.3732 11.5838 54.3732 11.3233C54.3732 11.0628 54.162 10.8516 53.9014 10.8516C53.6409 10.8516 53.4297 11.0628 53.4297 11.3233C53.4297 11.5838 53.6409 11.7951 53.9014 11.7951Z"/>`;
+
+/* ============================================================ 1. cover — the scramble lockup (ported from INTRO-ASSET-2027) */
+(() => {
+  const CFG = { lines: ["Billy Newton", "31 years old", "London, England", "Design", "Ai Operations"], variance:.30, radius:200, falloff:1.5, tail:.87, swapMs:50, gain:1.2, maxProb:.72, minHeat:.09, /* a touch below the original asset's bite, same speed */
+    glyphs: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@{}()[]?~^_+;:\"*=><-/|!$%&" };
+  const INTRO = { delay:400, dur:750, stagger:80, reveal:80 };
+  const PALETTE = [{hex:"#186AFF", w:249.2}, {hex:null, w:77.0}, {hex:"#B3FF1A", w:26.0}, {hex:"#AA00FF", w:26.0}, {hex:"#FF1AD1", w:26.0}, {hex:"#FF591A", w:26.0}]; /* Figma 9:238 width-weighted palette, as the original asset */
+  const PCUM = (() => { const t = PALETTE.reduce((a,p)=>a+p.w,0); let acc=0; return PALETTE.map(p => (acc += p.w)/t); })();
+  const swatch = () => { const r = Math.random(); for (let i=0;i<PCUM.length;i++) if (r < PCUM[i]) return PALETTE[i].hex; return null; };
+  const rand = a => a[(Math.random()*a.length)|0];
+  const block = $('#lockup'), card = $('#coverCard');
+  let chars = [], introT0 = 0, lastMove = performance.now(), IDLE = 8000, replay = false, visible = true, px = -1e4, py = -1e4, over = false;
+  function build(){
+    block.textContent = ""; chars = [];
+    CFG.lines.forEach((line, li) => {
+      const row = document.createElement('div'); row.className = 'line'; let ii = 0;
+      for (const orig of line){
+        const el = document.createElement('span'); el.className = 'ch'; const isSpace = orig === ' ';
+        el.textContent = isSpace ? ' ' : orig; if (!reduced && !isSpace) el.style.visibility = 'hidden'; row.appendChild(el);
+        chars.push({el, orig, isSpace, li, ii: ii++, len: line.length, cx:0, cy:0, prox:0, until:0, glyph:orig, color:null, hidden:!reduced && !isSpace, bias: 1 - Math.random()*CFG.variance});
+      }
+      block.appendChild(row);
+    });
+    measure();
+  }
+  function measure(){
+    for (const c of chars){ c.el.style.width = ''; c.el.textContent = c.isSpace ? ' ' : c.orig; }
+    const w = chars.map(c => c.el.getBoundingClientRect().width);
+    chars.forEach((c,i) => { c.el.style.width = w[i] + 'px'; });
+    for (const c of chars){ const r = c.el.getBoundingClientRect(); c.cx = r.left + r.width/2; c.cy = r.top + r.height/2; }
+    for (const c of chars) paint(c, c.glyph, c.color);
+  }
+  const radius = () => Math.max(90, CFG.radius * Math.min(1, innerWidth/1920) * (innerWidth < 600 ? 1.6 : 1));
+  function proximity(x, y, r = radius(), cap = 1){ for (const c of chars){ if (c.isSpace) continue; const d = Math.hypot(x - c.cx, y - c.cy); if (d >= r) continue; const t = Math.min(cap, Math.pow(1 - d/r, CFG.falloff)); if (t > c.prox) c.prox = t; } }
+  function paint(c, glyph, color){ c.glyph = glyph; c.color = color; if (c.el.textContent !== glyph) c.el.textContent = glyph; c.el.style.color = color || ''; }
+  const lineStart = li => INTRO.delay + li*INTRO.stagger;
+  function introState(c, t){ if (reduced) return 'done'; const lt = t - lineStart(c.li); if (lt < 0) return replay ? 'scr' : 'wait'; const p = clamp01((lt - INTRO.reveal) / (INTRO.dur - INTRO.reveal)); return c.ii < Math.floor(p*c.len) ? 'done' : 'scr'; }
+  function step(now){
+    const it = now - introT0;
+    /* 8s with no input: replay the intro scramble (hidden-wait skipped so the name never blinks out), then wait another 8s */
+    if (!reduced && now - Math.max(lastMove, introT0) > IDLE){ introT0 = now - INTRO.delay; replay = true; }
+    for (const c of chars){
+      if (c.isSpace) continue; c.prox *= CFG.tail;
+      const st = introState(c, it), hide = st === 'wait';
+      if (c.hidden !== hide){ c.hidden = hide; c.el.style.visibility = hide ? 'hidden' : ''; }
+      if (hide) continue;
+      const heat = st === 'scr' ? 1 : c.prox;
+      if (now < c.until) continue; c.until = now + CFG.swapMs * (0.6 + Math.random()*0.9);
+      const hot = st === 'scr' || (heat > CFG.minHeat && Math.random() < Math.min(CFG.maxProb, clamp01(heat*CFG.gain)));
+      if (hot) paint(c, rand(CFG.glyphs), swatch()); else if (c.color || c.glyph !== c.orig) paint(c, c.orig, null);
+    }
+  }
+  function frame(now){ if (visible) step(now); requestAnimationFrame(frame); }
+  ['keydown','wheel','scroll','pointerdown','touchstart'].forEach(t => addEventListener(t, () => { lastMove = performance.now(); }, {passive:true}));
+  addEventListener('pointermove', e => { lastMove = performance.now(); px = e.clientX; py = e.clientY; proximity(px, py); }, {passive:true});
+  card.addEventListener('pointerenter', () => { over = true; }); card.addEventListener('pointerleave', () => { over = false; });
+  card.addEventListener('pointerenter', () => measure(), {once:true});
+  addEventListener('pointerdown', e => proximity(e.clientX, e.clientY, radius()*1.4), {passive:true});
+  addEventListener('resize', measure);
+  addEventListener('keydown', e => { if (e.key.toLowerCase() === 'r' && !e.metaKey && !e.ctrlKey && document.activeElement === document.body){ introT0 = performance.now(); replay = false; } });
+  new IntersectionObserver(([en]) => { const was = visible; visible = en.isIntersecting; if (visible && !was && !reduced){ introT0 = performance.now() - INTRO.delay; replay = true; } }, {threshold: .5}).observe(card); /* coming back to the cover (Back to the top, the logo, scrolling up) replays the scramble */
+  if (document.fonts) document.fonts.ready.then(measure);
+  build(); introT0 = performance.now(); requestAnimationFrame(frame);
+})();
+
+/* ============================================================ 2. the deck engine */
+const Deck = (() => {
+  const segs = [$('#seg0'), $('#seg1'), $('#seg2'), $('#seg3')];
+  const pagerNum = $('#pagerNum'), pagerName = $('#pagerName'), dots = $('#dots');
+  let steps = [], total = 0; // {el, d?, i?, crumbs, title}
+  const decks = $$('.deck').map(deck => {
+    const stage = $(':scope > .stage', deck), slides = $$(':scope > .stage > .slide', deck);
+    deck.style.setProperty('--n', slides.length);
+    // carry layer/cols forward so overlays sit on the text reached so far
+    let layer = $(':scope > .tl', stage)?.dataset.layer || 'a', cols = '0';
+    slides.forEach(s => { if (s.dataset.layer) layer = s.dataset.layer; if (s.dataset.cols) cols = s.dataset.cols; s.dataset.eLayer = layer; s.dataset.eCols = cols; });
+    return { deck, stage, slides, cur: -1 };
+  });
+  let active = -1;
+  function buildSteps(){ steps = []; active = -1;
+    $$('[data-step], .deck').forEach(el => { if (getComputedStyle(el).display === 'none') return;
+      if (el.classList.contains('deck')){ const d = decks.find(x => x.deck === el); d.slides.forEach((s, i) => steps.push({ el: s, d, i, crumbs: s.dataset.crumbs || '', title: el.dataset.title })); }
+      else steps.push({ el, crumbs: el.dataset.crumbs || '', title: el.dataset.title }); });
+    total = steps.length; }
+  const outroOf = d => { const o = d.deck.nextElementSibling; return o && o.classList.contains('outro') ? o : null; };
+  function enterNow(id){ const d = decks.find(x => x.deck.id === id); if (!d) return;
+    decks.forEach(x => { const on = x === d; x.deck.classList.toggle('solo', on); outroOf(x)?.classList.toggle('solo', on); if (!on){ playVideos(x, null); x.cur = -1; } });
+    document.body.dataset.solo = id; buildSteps(); flowMode(flowMQ.matches); scrollTo({ top: 0, behavior: 'instant' }); dispatchEvent(new Event('resize')); update(); }
+  function exitNow(target){ decks.forEach(x => { playVideos(x, null); x.cur = -1; x.deck.classList.remove('solo'); outroOf(x)?.classList.remove('solo'); });
+    delete document.body.dataset.solo; buildSteps(); dispatchEvent(new Event('resize')); update();
+    const el = target && document.querySelector(target); scrollTo({ top: el ? el.getBoundingClientRect().top + scrollY : 0, behavior: 'instant' }); update(); }
+  /* project switches happen under a short veil instead of a hard cut (not on first load) */
+  const veil = $('#veil'); let booted = false; setTimeout(() => { booted = true; }, 900);
+  function swap(fn){ if (!booted || reduced){ fn(); return; } veil.classList.add('on'); setTimeout(() => { fn(); requestAnimationFrame(() => requestAnimationFrame(() => veil.classList.remove('on'))); }, 260); }
+  function enter(id){ swap(() => enterNow(id)); }
+  function exit(target){ const t = performance.now(); hush = t + 900; hushCap = t + 2600; swap(() => exitNow(target)); }
+  /* scroll momentum from the project would carry on past #work after the jump: swallow wheel/touch scrolling until the flick dies out (200ms quiet, 2.6s at most) */
+  let hush = 0, hushCap = 0; const stillHushed = e => { const t = performance.now(); if (t < hush){ e.preventDefault(); hush = Math.min(hushCap, Math.max(hush, t + 200)); } };
+  addEventListener('wheel', stillHushed, {passive:false}); addEventListener('touchmove', stillHushed, {passive:false});
+  function route(){ const id = location.hash.slice(1);
+    if (decks.some(x => x.deck.id === id)){ if (document.body.dataset.solo !== id) enter(id); return; }
+    if (document.body.dataset.solo){ exit(location.hash && location.hash !== '#' ? location.hash : '#work'); return; }
+    if (location.hash && location.hash !== '#'){ const el = document.querySelector(location.hash); if (el) scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: reduced ? 'instant' : 'smooth' }); } }
+  addEventListener('hashchange', route);
+
+  function setSeg(i, text){ const s = segs[i]; if (!s) return; if (!text){ s.classList.remove('on'); return; } if (s.textContent !== text){ s.classList.remove('on'); s.textContent = text; void s.offsetWidth; } s.classList.add('on'); }
+  function crumbs(str, project){ let parts = str ? str.split('|') : [];
+    /* inside a project, '/ Projects' becomes that project's name (and a repeat of it in the next slot is dropped) */
+    if (project && parts[0] === 'Projects'){ parts[0] = project; if (parts[1] === project) parts.splice(1, 1); }
+    for (let i=0;i<4;i++) setSeg(i, parts[i] ? '/ ' + parts[i] : ''); }
+  function pager(n, title){ const t = String(n+1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0'); if (pagerNum.textContent !== t && !reduced && pagerNum.animate) pagerNum.animate([{opacity:.15}, {opacity:1}], {duration:450, easing:'cubic-bezier(.22,1,.36,1)'}); pagerNum.textContent = t; pagerName.textContent = title; }
+  function setDots(d){
+    if (!d){ dots.classList.remove('on'); return; }
+    if (dots.dataset.deck !== d.deck.id){ dots.dataset.deck = d.deck.id; dots.innerHTML = d.slides.map((_, i) => `<button aria-label="Slide ${i+1}" data-i="${i}"></button>`).join(''); $$('button', dots).forEach(b => b.addEventListener('click', () => go(steps.findIndex(s => s.d === d && s.i === +b.dataset.i)))); }
+    $$('button', dots).forEach((b, i) => b.classList.toggle('on', i === d.cur)); dots.classList.add('on');
+  }
+  let gestureNeeded = false;
+  function soundState(v, on){ const b = v.parentElement.querySelector('.snd'); if (!b) return; b.textContent = on ? 'Mute' : 'Tap for sound'; b.classList.toggle('quiet', on); }
+  function playWithSound(v){ v.muted = false; const p = v.play(); if (p && p.then) p.then(() => soundState(v, true)).catch(() => { v.muted = true; v.play().catch(() => {}); soundState(v, false); gestureNeeded = true; }); }
+  function playVideos(d, slide){ $$('video', d.deck).forEach(v => { const on = slide && slide.contains(v); if (on){ if ('sound' in v.dataset && !v.dataset.userMuted) playWithSound(v); else { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => { gestureNeeded = true; }); } } else if (!v.paused) v.pause(); }); }
+  $$('.snd').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); const v = b.parentElement.querySelector('video'); if (v.muted){ delete v.dataset.userMuted; playWithSound(v); } else { v.muted = true; v.dataset.userMuted = 1; soundState(v, false); } }));
+  const unlock = () => { if (!gestureNeeded) return; gestureNeeded = false; decks.forEach(d => { if (d.cur >= 0) playVideos(d, d.slides[d.cur]); }); };
+  ['pointerdown','keydown','touchstart'].forEach(t => addEventListener(t, unlock, {passive:true}));
+  function setStep(d, i){
+    if (d.cur === i) return; d.cur = i;
+    const slide = d.slides[i];
+    d.slides.forEach((s, k) => s.classList.toggle('on', k === i));
+    d.stage.dataset.layer = slide.dataset.eLayer; d.stage.dataset.cols = slide.dataset.eCols; d.stage.dataset.kind = slide.dataset.kind;
+    d.stage.dataset.theme = slide.dataset.theme || (slide.dataset.kind === 'full' ? 'dark' : 'light');
+    d.stage.style.setProperty('--dim', slide.dataset.dim || 0);
+    playVideos(d, slide);
+    d.deck.dispatchEvent(new CustomEvent('stepchange', { detail: { slide, i } }));
+  }
+  function activate(n){ if (n === active || n < 0 || n >= total) return; active = n; const s = steps[n]; if (document.body.dataset.solo && s.el.classList.contains('outro')){ if (location.hash !== '#work') location.hash = 'work'; return; } crumbs(s.crumbs, s.d && s.title); pager(n, s.title); setDots(s.d); document.body.classList.toggle('on-end', s.el.id === 'end'); document.body.classList.toggle('on-cover', s.el.id === 'cover'); }
+  function update(){
+    const vh = innerHeight, mid = vh * .5; let best = -1;
+    if (!flowMQ.matches) for (const d of decks){
+      const r = d.deck.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= vh){ if (d.cur >= 0){ playVideos(d, null); d.cur = -1; } continue; }
+      const p = clamp01(-r.top / (d.deck.offsetHeight - vh));
+      const i = Math.min(d.slides.length - 1, Math.floor(p * d.slides.length));
+      setStep(d, i);
+      if (r.top <= mid && r.bottom >= mid) best = steps.findIndex(s => s.d === d && s.i === i);
+    }
+    if (best < 0){ let bd = Infinity; steps.forEach((s, n) => { const r = s.el.getBoundingClientRect(); if (s.d && flowMQ.matches){ /* flow mode: slides are blocks */ } else if (s.d) return; const c = r.top + r.height/2, dist = Math.abs(c - mid); if (r.top <= mid && r.bottom >= mid && dist < bd){ best = n; bd = dist; } }); }
+    if (best >= 0) activate(best);
+    $('#progress').style.transform = `scaleX(${clamp01(scrollY / (document.documentElement.scrollHeight - vh))})`;
+  }
+  const fitFrames = () => $$('.stage').forEach(s => { if (s.clientWidth) s.style.setProperty('--k', s.clientWidth / 1920); });
+  let ticking = false;
+  const logoSvg = $('#logoSvg'), spin = () => { if (!reduced) logoSvg.style.transform = `rotate(${scrollY * .12}deg)`; };
+  addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(() => { ticking = false; update(); spin(); }); } }, {passive:true}); spin();
+  addEventListener('resize', () => { fitFrames(); update(); }); fitFrames();
+  function targetY(n){ const s = steps[n]; if (!s.d || flowMQ.matches) return s.el.getBoundingClientRect().top + scrollY - (flowMQ.matches ? 80 : 0);
+    const top = s.d.deck.getBoundingClientRect().top + scrollY, runway = s.d.deck.offsetHeight - innerHeight; return top + (s.i + .5) * (runway / s.d.slides.length); }
+  function go(n){ if (n < 0 || n >= total) return; scrollTo({ top: targetY(n), behavior: reduced ? 'instant' : 'smooth' }); }
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey || document.querySelector('dialog[open]')) return;
+    if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key) && !e.shiftKey){ e.preventDefault(); go(active + 1); }
+    else if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key) || (e.key === ' ' && e.shiftKey)){ e.preventDefault(); go(active - 1); }
+    else if (e.key === 'Home'){ e.preventDefault(); go(0); } else if (e.key === 'End'){ e.preventDefault(); go(total - 1); }
+  });
+  /* inside a project (desktop): one wheel/trackpad gesture = one slide, and a click anywhere that isn't interactive goes to the next slide.
+     A gesture is locked out until its momentum tail dies (events closer than 160ms, deltas no longer growing); a fresh, harder flick counts as a new one */
+  const paged = () => document.body.dataset.solo && !flowMQ.matches && !document.querySelector('dialog[open]');
+  let wLock = 0, wCap = 0, wLast = 0, wPrev = 0, wStep = 0;
+  addEventListener('wheel', e => { if (!paged() || e.ctrlKey || performance.now() < hush) return;
+    const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX, a = Math.abs(d), t = performance.now(), gap = t - wLast, prev = wPrev; wLast = t; wPrev = a;
+    e.preventDefault();
+    if (t < wLock){ if (gap < 160) wLock = Math.min(wCap, t + 160); return; }
+    if (gap < 160 && t - wStep < 3000 && a <= prev * 1.3) return; /* still the same flick's tail */
+    if (a < 4) return;
+    wStep = t; wLock = t + 650; wCap = t + 1200; go(active + Math.sign(d)); }, {passive:false});
+  const NOT_NEXT = 'a, button, input, textarea, select, label, dialog, [data-lightbox], [role="button"], .sl-panel, .snd, .scale-tabs, .fb, .pills';
+  addEventListener('click', e => { if (!paged() || e.button !== 0 || e.defaultPrevented) return;
+    if (!e.target.closest('.deck.solo .stage') || e.target.closest(NOT_NEXT)) return;
+    if (String(getSelection && getSelection()).trim()) return; /* selecting text, not paging */
+    go(active + 1); });
+  $$('#index a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const id = a.getAttribute('href').slice(1); if (location.hash === '#' + id) enter(id); else location.hash = id; }));
+  // flow mode: slides un-pin; videos autoplay when visible
+  const vio = new IntersectionObserver(ents => ents.forEach(en => { const v = en.target; if (en.isIntersecting && en.intersectionRatio > .4){ if ('sound' in v.dataset && !v.dataset.userMuted) playWithSound(v); else { v.muted = true; v.play().catch(()=>{}); } } else if (!v.paused) v.pause(); }), {threshold:[0,.4,.6]});
+  // flow mode interleaves each text layer at the point its first text slide appears, so the deck's order survives
+  function flowMode(on){ decks.forEach(d => { d.cur = -1; d.slides.forEach((s, i) => { s.classList.toggle('on', on); s.style.order = on ? i*2 + 1 : ''; }); $$(':scope > .tl', d.stage).forEach(t => { const k = d.slides.findIndex(s => s.dataset.kind === 'text' && s.dataset.eLayer === t.dataset.layer); t.style.order = on ? (k < 0 ? 0 : k*2) : ''; }); d.stage.dataset.cols = on ? '3' : ''; d.stage.dataset.layer = on ? 'a' : ''; d.stage.dataset.kind = ''; d.stage.dataset.theme = 'light'; }); $$('.deck video').forEach(v => { if (on) vio.observe(v); else { vio.unobserve(v); v.pause(); } }); update(); }
+  flowMQ.addEventListener('change', e => flowMode(e.matches)); flowMode(flowMQ.matches);
+  buildSteps(); route(); update();
+  return { get steps(){ return steps; }, decks, go, enter, exit };
+})();
+
+/* ============================================================ 3. reveal on scroll (outside the decks) */
+(() => { const els = $$('.rv'); if (reduced){ els.forEach(e => e.classList.add('in')); return; } const io = new IntersectionObserver(ents => ents.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }), {rootMargin:'0px 0px -8% 0px', threshold: .05}); els.forEach(e => io.observe(e)); })();
+
+/* ============================================================ 4. index — the Figma hover states + the 1920-unit artboard */
+(() => {
+  const work = $('#work'), board = $('#artboard'), links = $$('#index a'), arts = $$('.art', board), expand = $('#index li.expand');
+  const fit = () => { const k = work.clientWidth / 1920; work.style.setProperty('--k', k); board.style.transform = `translate(0, ${(work.clientHeight - 1080 * k) / 2}px) scale(${k})`; };
+  addEventListener('resize', fit); fit();
+  let leaveT = 0;
+  const set = key => { clearTimeout(leaveT); if (key) work.dataset.art = key; else delete work.dataset.art; arts.forEach(a => a.classList.toggle('on', a.dataset.for === key)); expand.classList.toggle('on', key === 'pay'); };
+  links.forEach(a => { a.addEventListener('pointerenter', () => { if (fine) set(a.dataset.art); }); a.addEventListener('focus', () => set(a.dataset.art)); a.addEventListener('blur', () => set(null)); });
+  $('#index').addEventListener('pointerleave', () => { leaveT = setTimeout(() => set(null), 120); });
+  $('#index').addEventListener('pointermove', e => { if (!fine || !(e.target instanceof Element)) return; const a = e.target.closest('a[data-art]'); if (a && work.dataset.art !== a.dataset.art) set(a.dataset.art); }, {passive:true});
+  /* skills list keeps its scramble on hover */
+  const GL = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@{}()[]?~^+;:*=<>-/|!$%&";
+  function prep(el){
+    const text = el.textContent; el.textContent = '';
+    text.split(' ').forEach((word, wi, arr) => { const w = document.createElement('span'); w.className = 'w'; for (const ch of word){ const s = document.createElement('span'); s.className = 'ch'; s.textContent = ch; w.appendChild(s); } el.appendChild(w); if (wi < arr.length - 1){ const sp = document.createElement('span'); sp.className = 'ch'; sp.textContent = ' '; el.appendChild(sp); } });
+    const spans = $$('.ch', el);
+    const fitW = () => { spans.forEach(s => { s.style.width = ''; s.textContent = s.dataset.o || s.textContent; s.dataset.o = s.textContent; }); spans.forEach(s => { s.style.width = s.getBoundingClientRect().width + 'px'; }); };
+    fitW(); addEventListener('resize', fitW); if (document.fonts) document.fonts.ready.then(fitW);
+    let run = 0;
+    el.addEventListener('pointerenter', () => { if (reduced) return; const t0 = performance.now(), dur = 650, n = spans.length; cancelAnimationFrame(run);
+      const tick = now => { const p = clamp01((now - t0)/dur); spans.forEach((s,i) => { const o = s.dataset.o; if (o === ' ') return; if (i < Math.floor(p*n)){ s.textContent = o; s.style.color=''; } else if (Math.random() < .55){ s.textContent = GL[(Math.random()*GL.length)|0]; s.style.color = Math.random() < .25 ? ['#186AFF','#B3FF1A','#AA00FF','#FF1AD1','#FF591A'][(Math.random()*5)|0] : ''; } }); if (p < 1) run = requestAnimationFrame(tick); else spans.forEach(s => { s.textContent = s.dataset.o; s.style.color=''; }); };
+      run = requestAnimationFrame(tick); });
+  }
+  $$('#skills li').forEach(prep);
+})();
+
+/* ============================================================ 5. the slider — Full → Focused → Stylised (Figma Component 4) */
+(() => {
+  const root = $('#slider'); if (!root) return;
+  const strip = $('.sl-strip', root), fill = $('#slFill'), labels = $$('.sl-labels span', root);
+  const STOPS = [0, 0.556, 1]; let p = 0, i = 0, timer = 0, touched = false, dragging = false, sx = 0, sp = 0;
+  const sk = () => root.clientWidth / 1432;
+  const fit = () => root.style.setProperty('--sk', sk()); addEventListener('resize', fit); fit();
+  const nearest = () => STOPS.reduce((b, s, k) => Math.abs(s - p) < Math.abs(STOPS[b] - p) ? k : b, 0);
+  function render(anim){ strip.classList.toggle('anim', !!anim); root.style.setProperty('--p', p); fill.setAttribute('width', Math.max(0, p * 1331 + 1432 - 100.7)); const n = nearest(); labels.forEach((l, k) => l.classList.toggle('on', k === n)); }
+  function go(n, user){ i = (n + 3) % 3; p = STOPS[i]; render(true); if (user){ touched = true; clearInterval(timer); timer = 0; } }
+  root.addEventListener('pointerdown', e => { dragging = true; sx = e.clientX; sp = p; root.setPointerCapture(e.pointerId); touched = true; clearInterval(timer); timer = 0; strip.classList.remove('anim'); });
+  root.addEventListener('pointermove', e => { if (!dragging) return; p = clamp01(sp - (e.clientX - sx) / (1331 * sk())); render(false); });
+  const up = e => { if (!dragging) return; dragging = false; if (Math.abs(e.clientX - sx) < 4){ const t = e.target.closest('.sl-labels span'); if (t){ go(labels.indexOf(t), true); return; } go(i + 1, true); return; } go(nearest(), true); };
+  root.addEventListener('pointerup', up); root.addEventListener('pointercancel', () => { dragging = false; go(nearest(), true); });
+  const slide = root.closest('.slide'), deck = root.closest('.deck');
+  const start = () => { if (reduced || touched || timer) return; timer = setInterval(() => go(i + 1), 3600); }, stop = () => { clearInterval(timer); timer = 0; };
+  deck.addEventListener('stepchange', e => e.detail.slide === slide ? start() : stop());
+  new IntersectionObserver(([en]) => { if (flowMQ.matches) en.isIntersecting ? start() : stop(); }, {threshold:.4}).observe(root);
+  render(false);
+})();
+
+/* ============================================================ 6. pan — large artwork moves against the pointer */
+(() => {
+  if (!fine) return;
+  $$('[data-pan]').forEach(p => {
+    const img = $('img', p); let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0, centred = false;
+    const centre = () => { const r = p.getBoundingClientRect(); tx = -(img.offsetWidth - r.width)/2; ty = -(img.offsetHeight - r.height)/2; if (!centred){ cx = tx; cy = ty; centred = true; img.style.transform = `translate(${cx}px,${cy}px)`; } };
+    const loop = () => { cx = lerp(cx, tx, .08); cy = lerp(cy, ty, .08); img.style.transform = `translate(${cx}px,${cy}px)`; raf = (Math.abs(cx-tx) > .3 || Math.abs(cy-ty) > .3) ? requestAnimationFrame(loop) : 0; };
+    p.addEventListener('pointermove', e => { const r = p.getBoundingClientRect(); const nx = clamp01((e.clientX - r.left)/r.width), ny = clamp01((e.clientY - r.top)/r.height); tx = -nx * Math.max(0, img.offsetWidth - r.width); ty = -ny * Math.max(0, img.offsetHeight - r.height); if (!raf) loop(); });
+    p.addEventListener('pointerleave', () => { centre(); if (!raf) loop(); });
+    img.addEventListener('load', centre); if (img.complete) centre(); addEventListener('resize', () => { centred = false; centre(); });
+  });
+})();
+
+/* ============================================================ 7. lightbox */
+(() => {
+  const lb = $('#lb'), img = $('#lbImg'), cap = $('#lbCap'), idx = $('#lbIdx');
+  const nodes = $$('[data-lightbox]');
+  const items = nodes.map(f => { const im = f.matches('img') ? f : $('img', f); return { src: im.getAttribute('src'), alt: im.alt }; });
+  let i = 0;
+  function show(n){ i = (n + items.length) % items.length; img.src = items[i].src; img.alt = items[i].alt; cap.textContent = items[i].alt; idx.textContent = String(i+1).padStart(2,'0') + ' / ' + String(items.length).padStart(2,'0'); }
+  nodes.forEach((f, n) => f.addEventListener('click', e => { if (e.target.closest('.pan')) return; e.stopPropagation(); show(n); lb.showModal(); }));
+  $('[data-prev]', lb).addEventListener('click', () => show(i-1)); $('[data-next]', lb).addEventListener('click', () => show(i+1));
+  softDialog(lb); $$('[data-close]', lb).forEach(b => b.addEventListener('click', () => softClose(lb)));
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('stage-lb')) softClose(lb); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowRight'){ e.stopPropagation(); show(i+1); } if (e.key === 'ArrowLeft'){ e.stopPropagation(); show(i-1); } });
+})();
+
+/* ============================================================ 8. peer feedback → dialog */
+(() => {
+  const dlg = $('#fbm'), body = $('#fbmBody');
+  $$('.fb').forEach(card => {
+    const open = () => { const name = $('.fb-name', card), date = $('.fb-date', card);
+      body.innerHTML = `<span class="fb-name">${name ? name.textContent : 'Peer feedback'}</span>${date ? `<span class="fb-date">${date.textContent}</span>` : ''}<p class="op">Operating Principles:</p>${$('.pills', card).outerHTML}<div class="fb-text">${$('.fb-text', card).innerHTML}</div>`;
+      dlg.showModal(); $('.close', dlg).focus(); };
+    card.addEventListener('click', e => { e.stopPropagation(); open(); });
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); open(); } });
+  });
+  softDialog(dlg); $$('[data-close]', dlg).forEach(b => b.addEventListener('click', () => softClose(dlg)));
+  dlg.addEventListener('click', e => { if (e.target === dlg) softClose(dlg); });
+})();
+
+/* ============================================================ 9. numbers count up when their slide arrives */
+(() => {
+  const fmt = (v, dec) => v.toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const els = $$('.num'); els.forEach(el => { el.dataset.final = el.textContent; });
+  if (reduced) return;
+  const run = el => { if (el.dataset.done) return; el.dataset.done = 1; const t = +el.dataset.count, dec = +(el.dataset.dec||0), pre = el.dataset.prefix||'', suf = el.dataset.suffix||'', t0 = performance.now(), dur = 1400;
+    const tick = now => { const p = clamp01((now - t0)/dur), e = 1 - Math.pow(1 - p, 4); el.textContent = pre + fmt(t*e, dec) + suf; if (p < 1) requestAnimationFrame(tick); else el.textContent = el.dataset.final; }; requestAnimationFrame(tick); };
+  els.forEach(el => { const dec = +(el.dataset.dec||0); el.textContent = (el.dataset.prefix||'') + fmt(0, dec) + (el.dataset.suffix||''); });
+  $$('.deck').forEach(d => d.addEventListener('stepchange', e => $$('.num', e.detail.slide).forEach(run)));
+  const io = new IntersectionObserver(ents => ents.forEach(en => { if (en.isIntersecting && flowMQ.matches) run(en.target); }), {threshold:.6}); els.forEach(e => io.observe(e));
+})();
+
+/* ============================================================ 10. parallax portrait + cursor dot */
+(() => {
+  if (reduced) return;
+  const px = $$('[data-parallax]').map(el => ({ el, img: $('img', el), k: +el.dataset.parallax })); let ticking = false;
+  const upd = () => { ticking = false; const vh = innerHeight; px.forEach(({el, img, k}) => { const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return; const c = (r.top + r.height/2 - vh/2) / vh; img.style.transform = `translateY(${(-c * k * 100).toFixed(2)}%)`; }); };
+  addEventListener('scroll', () => { if (!ticking){ ticking = true; requestAnimationFrame(upd); } }, {passive:true}); upd();
+  if (!fine) return;
+  const cur = $('#cur'); let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+  const loop = () => { cx = lerp(cx, tx, .2); cy = lerp(cy, ty, .2); cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`; raf = requestAnimationFrame(loop); };
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (!raf){ cx = tx; cy = ty; loop(); } cur.classList.add('show'); const big = e.target instanceof Element && e.target.closest('a, button, [data-lightbox], .fb, [role=tab]'); cur.classList.toggle('big', !!big); }, {passive:true});
+  document.addEventListener('mouseleave', () => cur.classList.remove('show'));
+})();
+
+/* ============================================================ 9. footer — the name fills the width and runs a mono (black on green) version of the cover scramble */
+(() => {
+  const end = $('#end'), name = $('#endName'); if (!end || !name) return;
+  const TEXT = name.textContent, GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#@{}()[]?~^_+;:\"*=><-/|!$%&";
+  const CFG = { radius:260, falloff:1.5, tail:.87, swapMs:50, gain:1.2, maxProb:.72, minHeat:.09, dur:750, reveal:80, idle:8000 };
+  const rand = () => GLYPHS[(Math.random()*GLYPHS.length)|0];
+  name.textContent = '';
+  const chars = [...TEXT].map((orig, i) => { const el = document.createElement('span'); el.className = 'ch'; el.textContent = orig; name.appendChild(el); return { el, orig, i, isSpace: orig === ' ', cx:0, cy:0, prox:0, until:0 }; });
+  const paint = (c, g) => { if (c.el.textContent !== g) c.el.textContent = g; };
+  /* fit the INK, not the box: pull the B's side bearing past the margin and size so the n's ink meets the right margin */
+  const fit = () => { chars.forEach(c => { c.el.style.width = ''; paint(c, c.orig); });
+    const cs = getComputedStyle(end), inner = end.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    name.style.fontSize = '100px'; name.style.marginLeft = '0px'; const w = name.scrollWidth || 1; let lsb = 0, rsb = 0;
+    try { const c = document.createElement('canvas').getContext('2d'); const ns = getComputedStyle(name); c.font = `${ns.fontWeight} 100px ${ns.fontFamily}`; const mb = c.measureText('B'), mn = c.measureText('n'); lsb = Math.max(0, -mb.actualBoundingBoxLeft); rsb = Math.max(0, mn.width - mn.actualBoundingBoxRight); } catch (e) {}
+    const ls = -parseFloat(getComputedStyle(name).letterSpacing) || 0; const ink = w + ls - lsb - rsb; /* gives back the trailing negative letter-spacing at 100px */
+    const size = 100 * inner / ink; name.style.fontSize = size.toFixed(2) + 'px'; name.style.marginLeft = (-lsb * size / 100).toFixed(2) + 'px';
+    const ws = chars.map(c => c.el.getBoundingClientRect().width); chars.forEach((c, i) => { c.el.style.width = ws[i] + 'px'; }); /* lock widths so swapped glyphs never reflow the line */
+    locate(); };
+  const locate = () => chars.forEach(c => { const r = c.el.getBoundingClientRect(); c.cx = r.left + r.width/2; c.cy = r.top + r.height/2; });
+  const radius = () => Math.max(110, CFG.radius * Math.min(1, innerWidth/1920) * (innerWidth < 600 ? 1.6 : 1));
+  const proximity = (x, y, r = radius()) => { for (const c of chars){ if (c.isSpace) continue; const d = Math.hypot(x - c.cx, y - c.cy); if (d >= r) continue; const t = Math.pow(1 - d/r, CFG.falloff); if (t > c.prox) c.prox = t; } };
+  /* the reveal: scrambles left to right then resolves, as the cover does; only after 8s idle on the footer */
+  let t0 = -1e9, lastInput = performance.now(), visible = false, raf = 0;
+  const play = now => { t0 = now; };
+  const step = now => {
+    if (!reduced && now - Math.max(lastInput, t0) > CFG.idle) play(now);
+    const p = clamp01((now - t0 - CFG.reveal) / (CFG.dur - CFG.reveal)), done = Math.floor(p * chars.length), intro = now - t0 < CFG.dur;
+    for (const c of chars){ if (c.isSpace) continue; c.prox *= CFG.tail;
+      const scr = intro && c.i >= done, heat = scr ? 1 : c.prox;
+      if (now < c.until) continue; c.until = now + CFG.swapMs * (0.6 + Math.random()*0.9);
+      if (scr || (heat > CFG.minHeat && Math.random() < Math.min(CFG.maxProb, clamp01(heat*CFG.gain)))) paint(c, rand()); else paint(c, c.orig); }
+  };
+  const frame = now => { if (!visible){ raf = 0; chars.forEach(c => paint(c, c.orig)); return; } step(now); raf = requestAnimationFrame(frame); };
+  new IntersectionObserver(([en]) => { const was = visible; visible = en.isIntersecting; if (visible && !was){ locate(); lastInput = performance.now(); if (!raf) raf = requestAnimationFrame(frame); } /* no reveal on arrival: only hover, or 8s idle */ }, {threshold: .25}).observe(end);
+  addEventListener('pointermove', e => { lastInput = performance.now(); if (visible && !reduced) proximity(e.clientX, e.clientY); }, {passive:true});
+  addEventListener('pointerdown', e => { lastInput = performance.now(); if (visible && !reduced) proximity(e.clientX, e.clientY, radius()*1.4); }, {passive:true});
+  ['keydown','wheel','touchstart'].forEach(t => addEventListener(t, () => { lastInput = performance.now(); }, {passive:true}));
+  addEventListener('scroll', () => { lastInput = performance.now(); if (visible) locate(); }, {passive:true}); /* the foot is sticky, so the letters move while the footer scrolls in */
+  addEventListener('resize', fit);
+  if (document.fonts) document.fonts.ready.then(fit);
+  fit();
+})();
+</script>
+</body>
+</html>
