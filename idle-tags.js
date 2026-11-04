@@ -9,9 +9,10 @@
    On Projects (#work) they wait until no project is hovered, clear
    when one is, and sit over a 50% black scrim for contrast.
    Never while a video is playing on screen; one starting clears them.
+   In projects (the Projects index and every project deck) the wait is 15s.
    ============================================================ */
 (() => {
-  const IDLE_MS = 5000;
+  const IDLE_MS = 5000, PROJECT_IDLE_MS = 15000;   // projects get longer: people are reading and watching
   const MATTER = 'https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js';
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -69,7 +70,12 @@
 
   let world = null, timer, loading = null;
   const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]') || hovered() || playing();
-  const idle = () => { clearTimeout(timer); if (!world) timer = setTimeout(drop, IDLE_MS); };
+  const inProject = () => {
+    if (document.body.dataset.solo) return true;
+    const el = document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('section');
+    return !!el && (el.id === 'work' || el.classList.contains('deck'));
+  };
+  const idle = () => { clearTimeout(timer); if (!world) timer = setTimeout(drop, inProject() ? PROJECT_IDLE_MS : IDLE_MS); };
   ['pointermove','pointerdown','keydown','wheel','touchstart','scroll'].forEach(t => addEventListener(t, idle, {passive:true}));
   // anything that moves the page clears the pile
   ['wheel','keydown','touchmove','scroll'].forEach(t => addEventListener(t, () => world && world.clear(), {passive:true}));
