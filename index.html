@@ -1174,10 +1174,12 @@ const Deck = (() => {
 (() => {
   const lb = $('#lb'), img = $('#lbImg'), cap = $('#lbCap'), idx = $('#lbIdx');
   const nodes = $$('[data-lightbox]');
-  const items = nodes.map(f => { const im = f.matches('img') ? f : $('img', f); return { src: im.getAttribute('src'), alt: im.alt }; });
-  let i = 0;
-  function show(n){ i = (n + items.length) % items.length; img.src = items[i].src; img.alt = items[i].alt; cap.textContent = items[i].alt; idx.textContent = String(i+1).padStart(2,'0') + ' / ' + String(items.length).padStart(2,'0'); }
-  nodes.forEach((f, n) => f.addEventListener('click', e => { if (e.target.closest('.pan')) return; e.stopPropagation(); show(n); lb.showModal(); }));
+  // Prev / Next stay inside the project the image belongs to, never across the whole site
+  const items = nodes.map(f => { const im = f.matches('img') ? f : $('img', f); return { src: im.getAttribute('src'), alt: im.alt, deck: f.closest('section.deck') }; });
+  const nav = $$('[data-prev], [data-next]', lb);
+  let group = items, i = 0;
+  function show(n){ i = (n + group.length) % group.length; const it = group[i]; img.src = it.src; img.alt = it.alt; cap.textContent = it.alt; idx.textContent = group.length > 1 ? String(i+1).padStart(2,'0') + ' / ' + String(group.length).padStart(2,'0') : ''; nav.forEach(b => b.hidden = group.length < 2); }
+  nodes.forEach((f, n) => f.addEventListener('click', e => { if (e.target.closest('.pan')) return; e.stopPropagation(); group = items.filter(it => it.deck === items[n].deck); show(group.indexOf(items[n])); lb.showModal(); }));
   $('[data-prev]', lb).addEventListener('click', () => show(i-1)); $('[data-next]', lb).addEventListener('click', () => show(i+1));
   softDialog(lb); $$('[data-close]', lb).forEach(b => b.addEventListener('click', () => softClose(lb)));
   lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('stage-lb')) softClose(lb); });
