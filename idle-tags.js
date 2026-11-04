@@ -8,6 +8,7 @@
    On the footer (body.on-end) the tags are black with two white.
    On Projects (#work) they wait until no project is hovered, clear
    when one is, and sit over a 50% black scrim for contrast.
+   Never while a video is playing on screen; one starting clears them.
    ============================================================ */
 (() => {
   const IDLE_MS = 5000;
@@ -57,11 +58,17 @@
 
   const work = document.getElementById('work');
   const onWork = () => { if (!work) return false; const r = work.getBoundingClientRect(); return r.top <= innerHeight / 2 && r.bottom >= innerHeight / 2; };
+  const playing = () => [...document.querySelectorAll('video')].some(v => {
+    if (v.paused || v.ended) return false;
+    const r = v.getBoundingClientRect();
+    return r.width && r.height && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth;
+  });
+  document.addEventListener('playing', () => { if (world && playing()) world.clear(); }, true);
   const hovered = () => onWork() && !!work.dataset.art;
   if (work) new MutationObserver(() => { if (world && work.dataset.art) world.clear(); }).observe(work, {attributes:true, attributeFilter:['data-art']});
 
   let world = null, timer, loading = null;
-  const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]') || hovered();
+  const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]') || hovered() || playing();
   const idle = () => { clearTimeout(timer); if (!world) timer = setTimeout(drop, IDLE_MS); };
   ['pointermove','pointerdown','keydown','wheel','touchstart','scroll'].forEach(t => addEventListener(t, idle, {passive:true}));
   // anything that moves the page clears the pile
