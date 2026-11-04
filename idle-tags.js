@@ -6,6 +6,8 @@
    drops the floor so they fall away, then the idle clock restarts.
    Skipped on the cover (body.on-cover) and while a dialog is open.
    On the footer (body.on-end) the tags are black with two white.
+   On Projects (#work) they wait until no project is hovered, clear
+   when one is, and sit over a 50% black scrim for contrast.
    ============================================================ */
 (() => {
   const IDLE_MS = 5000;
@@ -38,7 +40,9 @@
 }
 .itag span{display:block; text-box:trim-both cap alphabetic}
 .itag.drag{cursor:grabbing}
-.itag.on{visibility:visible}`;
+.itag.on{visibility:visible}
+.itags-scrim{position:fixed; inset:0; z-index:44; pointer-events:none; background:rgba(0,0,0,.5); opacity:0; transition:opacity .6s cubic-bezier(.22,1,.36,1)}
+.itags-scrim.on{opacity:1}`;
   document.head.appendChild(css);
 
   const layer = document.createElement('div');
@@ -48,10 +52,16 @@
     const s = document.createElement('span'); s.textContent = label; el.appendChild(s);
     layer.appendChild(el); return el;
   });
-  document.body.appendChild(layer);
+  const scrim = document.createElement('div'); scrim.className = 'itags-scrim';
+  document.body.append(scrim, layer);
+
+  const work = document.getElementById('work');
+  const onWork = () => { if (!work) return false; const r = work.getBoundingClientRect(); return r.top <= innerHeight / 2 && r.bottom >= innerHeight / 2; };
+  const hovered = () => onWork() && !!work.dataset.art;
+  if (work) new MutationObserver(() => { if (world && work.dataset.art) world.clear(); }).observe(work, {attributes:true, attributeFilter:['data-art']});
 
   let world = null, timer, loading = null;
-  const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]');
+  const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]') || hovered();
   const idle = () => { clearTimeout(timer); if (!world) timer = setTimeout(drop, IDLE_MS); };
   ['pointermove','pointerdown','keydown','wheel','touchstart','scroll'].forEach(t => addEventListener(t, idle, {passive:true}));
   // anything that moves the page clears the pile
@@ -78,6 +88,7 @@
 
   function physics(){
     paint();
+    scrim.classList.toggle('on', onWork());
     const {Engine, Bodies, Body, Composite, Constraint, Vector} = Matter;
     const engine = Engine.create({gravity:{y:1.1}});
     const TAG = 0x2, HAND = 0x4;
@@ -186,7 +197,7 @@
     return {
       clear(){
         if (!floorOn) return;
-        floorOn = false; release(); handOn(false);
+        floorOn = false; release(); handOn(false); scrim.classList.remove('on');
         timers.forEach(clearTimeout);
         items = items.filter(it => it.el.classList.contains('on'));   // tags still waiting to drop never appear
         items.forEach(it => Body.setVelocity(it.b, {x:it.b.velocity.x, y:Math.max(it.b.velocity.y, 6)}));
