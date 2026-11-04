@@ -167,6 +167,7 @@ body.on-cover .crumbs .c0 a, body.on-cover .logo{opacity:0; pointer-events:none}
 #work[data-art="pv"] a[data-art="pv"], #work[data-art="ps"] a[data-art="ps"], #work[data-art="pay"] a[data-art="pay"], #work[data-art="ac"] a[data-art="ac"], #work[data-art="pm"] a[data-art="pm"], .index a:focus-visible{opacity:1}
 .index li.expand .inline-art{display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease)}
 .index li.expand.on .inline-art{grid-template-rows:1fr}
+.index li.expand.on .inline-art{cursor:pointer}
 .index li.expand .inline-art > div{overflow:hidden; position:relative; min-height:0}
 .index li.expand .inline-art > div::before{content:""; display:block; height:calc(540px * var(--k))}
 .index li.expand .inline-art img{position:absolute; left:50%; top:calc(151px * var(--k)); width:calc(1275px * var(--k)); max-width:none; transform:translateX(-50%) translateY(10px); opacity:0; transition:opacity .35s var(--ease-soft) .04s, transform .45s var(--ease) .04s}
@@ -687,7 +688,7 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
     <!-- 22 the last mile -->
     <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Features">
       <div class="box enter has-sound" style="left:13.4%; right:13.4%; top:15%; bottom:15%; border-radius:28px"><video src="video/ps-shoutout.mp4" poster="img/poster-ps-shoutout.jpg" data-sound playsinline preload="metadata" aria-label="David Lee on stage: Part Three, The Last Mile — completed workbook in, designed on-brand document out"></video><button class="snd" type="button" aria-label="Toggle sound">Tap for sound</button></div>
-      <div class="pcard enter d1" style="position:absolute; right:9%; top:9%; width:clamp(150px, 15vw, 240px)"><img src="img/ps-davidlee.png" alt="" width="578" height="554"><b>David Lee</b><span>Senior Director, Revenue Operations</span></div>
+      <div class="pcard enter d1" style="position:absolute; right:9%; top:9%; width:clamp(150px, 15vw, 240px)"><img src="img/ps-davidlee-face.jpg" alt="" width="480" height="480"><b>David Lee</b><span>Senior Director, Revenue Operations</span></div>
     </div>
     <!-- 23 peer feedback -->
     <div class="slide" data-kind="overlay" data-dim=".6" data-crumbs="Projects|Problem|Features">
@@ -803,7 +804,7 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
     <!-- 40 the response -->
     <div class="slide" data-kind="overlay" data-dim=".9" data-crumbs="Projects|Problem|Ambition|Solution">
       <div class="m-stack" style="position:absolute; left:9%; right:9%; top:12%; bottom:8%; display:grid; grid-template-columns:.62fr 1.5fr 1.15fr; gap:var(--gut); align-items:start">
-        <div class="pcard enter d1" style="align-self:end; margin-bottom:12%"><img src="img/ac-rory.png" alt="" width="700" height="640"><b>Rory O'Neill</b><span>Chief Marketing Officer · He / Him</span></div>
+        <div class="pcard enter d1" style="align-self:end; margin-bottom:12%"><img src="img/ac-rory-face.jpg" alt="" width="480" height="480"><b>Rory O'Neill</b><span>Chief Marketing Officer · He / Him</span></div>
         <div class="slack enter" style="padding-top:12px">
           <div class="fn">Agentic User Flow - Example.mov ▾</div>
           <div class="vid"><video src="video/ac-walkthrough.mp4" poster="img/poster-ac-walkthrough.jpg" muted loop playsinline preload="metadata" aria-label="The one-minute walkthrough: duplicating the template and personalising the agentic flow"></video></div>
@@ -819,9 +820,9 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
             <div class="msg"><div class="av">KS</div><div><div class="who"><b>Kevin Stanley-Dowd</b><span class="vip">VIP</span><i>11:34 AM</i></div><p>Great work <span class="at">@Billy Newton</span> 🙌</p></div></div>
             <div class="msg"><div class="av">ZD</div><div><div class="who"><b>Zlatka Deliagova</b><i>11:51 AM</i></div><p>Consistently impressive, <span class="at">@Billy Newton</span>. Another strong delivery. 🚀</p></div></div>
             <div class="msg"><div class="av">QH</div><div><div class="who"><b>Quinn Harker</b><i>1:20 PM</i></div><p>This is great! Thank you Billy! 🙌</p></div></div>
-            <div class="msg"><div class="av"><img src="img/ac-orrin.png" alt="" width="500" height="721" style="object-position:50% 22%"></div><div><div class="who"><b>Orrin Ward</b><i>4:17 PM</i></div><p>I love this! Awesome stuff mate.</p></div></div>
+            <div class="msg"><div class="av"><img src="img/ac-orrin-face.jpg" alt="" width="480" height="480"></div><div><div class="who"><b>Orrin Ward</b><i>4:17 PM</i></div><p>I love this! Awesome stuff mate.</p></div></div>
           </div>
-          <div class="pcard enter d3" style="width:clamp(150px, 14vw, 230px); justify-self:end"><img src="img/ac-orrin.png" alt="" width="500" height="721" style="object-position:50% 22%"><b>Orrin Ward</b><span>Staff Product Design Operations · He/Him</span></div>
+          <div class="pcard enter d3" style="width:clamp(150px, 14vw, 230px); justify-self:end"><img src="img/ac-orrin-face.jpg" alt="" width="480" height="480"><b>Orrin Ward</b><span>Staff Product Design Operations · He/Him</span></div>
         </div>
       </div>
     </div>
@@ -1098,6 +1099,8 @@ const Deck = (() => {
     if (String(getSelection && getSelection()).trim()) return; /* selecting text, not paging */
     go(active + 1); });
   $$('#index a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const id = a.getAttribute('href').slice(1); if (location.hash === '#' + id) enter(id); else location.hash = id; }));
+  // the WTWCO artwork that opens above Interactive Experiences opens the project too
+  $$('#index li.expand .inline-art').forEach(art => art.addEventListener('click', () => $('a[data-art]', art.parentElement).click()));
   // flow mode: slides un-pin; videos autoplay when visible
   const vio = new IntersectionObserver(ents => ents.forEach(en => { const v = en.target; if (en.isIntersecting && en.intersectionRatio > .4){ if ('sound' in v.dataset && !v.dataset.userMuted) playWithSound(v); else { v.muted = true; v.play().catch(()=>{}); } } else if (!v.paused) v.pause(); }), {threshold:[0,.4,.6]});
   // flow mode interleaves each text layer at the point its first text slide appears, so the deck's order survives
