@@ -39,7 +39,8 @@ a{color:inherit; text-decoration:none}
 .corner{position:fixed; z-index:2; font-size:15px; line-height:1.1; letter-spacing:-.03em}
 .crumb{left:var(--edge); top:43px; font-weight:600}
 .call{right:var(--edge); top:43px; text-align:right}
-.call a:hover{opacity:.6}
+.call a:hover, .crumb:hover{opacity:.6}
+.crumb{transition:opacity .3s var(--ease)}
 .call a{transition:opacity .3s var(--ease)}
 @media (max-width: 700px){ .crumb,.call{top:24px} }
 
@@ -59,6 +60,7 @@ a{color:inherit; text-decoration:none}
   left:calc(955.64 * var(--u)); top:calc(871 * var(--u)); translate:-50% 0; white-space:nowrap;
   font-size:max(calc(29.49 * var(--u)), 17px); letter-spacing:-.04em; line-height:1;
 }
+.zero{pointer-events:auto; cursor:pointer}
 .lost a{pointer-events:auto; transition:opacity .3s var(--ease)}
 .lost a:hover{opacity:.6}
 
@@ -90,12 +92,12 @@ a{color:inherit; text-decoration:none}
 </head>
 <body>
 
-<div class="corner crumb"><span class="trim">/404</span></div>
+<a class="corner crumb" href="/"><span class="trim">Home</span></a>
 <div class="corner call"><a class="trim" href="tel:+447534872153">Call me maybe?<br>+44 (0) 7534 872 153</a></div>
 
 <main class="stage" aria-label="404, page not found">
   <span class="four l trim" aria-hidden="true">4</span>
-  <div class="zero" aria-hidden="true"><svg aria-hidden="true" focusable="false" preserveAspectRatio="none" overflow="visible" style="display: block;" width="523.639" height="523.685" viewBox="0 0 523.639 523.685" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <a class="zero" href="/" aria-label="Home"><svg aria-hidden="true" focusable="false" preserveAspectRatio="none" overflow="visible" style="display: block;" width="523.639" height="523.685" viewBox="0 0 523.639 523.685" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Group 1000007368">
 <path id="Vector" d="M40.187 388.152C46.9456 388.152 52.4244 382.673 52.4244 375.915C52.4244 369.156 46.9456 363.677 40.187 363.677C33.4285 363.677 27.9497 369.156 27.9497 375.915C27.9497 382.673 33.4285 388.152 40.187 388.152Z" fill="white"/>
 <path id="Vector_2" d="M142.763 493.902C148.087 493.902 152.403 489.586 152.403 484.262C152.403 478.938 148.087 474.622 142.763 474.622C137.439 474.622 133.122 478.938 133.122 484.262C133.122 489.586 137.439 493.902 142.763 493.902Z" fill="white"/>
@@ -142,7 +144,7 @@ a{color:inherit; text-decoration:none}
 <path id="Vector_43" d="M512.549 261.463C516.682 261.463 520.032 258.112 520.032 253.98C520.032 249.847 516.682 246.496 512.549 246.496C508.416 246.496 505.066 249.847 505.066 253.98C505.066 258.112 508.416 261.463 512.549 261.463Z" fill="white"/>
 <path id="Vector_44" d="M452.668 99.0538C454.856 99.0538 456.63 97.2801 456.63 95.0921C456.63 92.904 454.856 91.1303 452.668 91.1303C450.48 91.1303 448.706 92.904 448.706 95.0921C448.706 97.2801 450.48 99.0538 452.668 99.0538Z" fill="white"/>
 </g>
-</svg></div>
+</svg></a>
   <span class="four r trim" aria-hidden="true">4</span>
   <h1 class="lost trim" style="margin:0; font-weight:500"><a href="/">Page not found</a></h1>
 </main>
