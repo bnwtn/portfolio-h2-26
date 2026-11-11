@@ -4,6 +4,7 @@
    (same behaviour as the 404 page). The cursor shoves them around and
    they can be grabbed and thrown. Scrolling, a key press or a touch
    drops the floor so they fall away, then the idle clock restarts.
+   Once someone grabs a tag the pile is theirs: it stays put to play with.
    Skipped on the cover (body.on-cover) and while a dialog is open.
    On the footer (body.on-end) the tags are black with two white.
    On Projects (#work) they wait until no project is hovered, clear
@@ -106,7 +107,7 @@
     const engine = Engine.create({gravity:{y:1.1}});
     const TAG = 0x2, HAND = 0x4;
     const W = () => innerWidth, H = () => innerHeight, T = 400;
-    let walls = [], floorOn = true, raf = 0;
+    let walls = [], floorOn = true, raf = 0, kept = false;
     const buildWalls = () => {
       Composite.remove(engine.world, walls);
       walls = [
@@ -161,6 +162,7 @@
     const downs = items.map(it => {
       const fn = e => {
         e.stopPropagation();
+        kept = true;
         const p = {x:e.clientX, y:e.clientY};
         const local = Vector.rotate(Vector.sub(p, it.b.position), -it.b.angle);
         grab = {it, c: Constraint.create({pointA:p, bodyB:it.b, pointB:Vector.rotate(local, it.b.angle), stiffness:.2, damping:.1, length:0})};
@@ -209,7 +211,7 @@
 
     return {
       clear(){
-        if (!floorOn) return;
+        if (!floorOn || kept) return;
         floorOn = false; release(); handOn(false); scrim.classList.remove('on');
         timers.forEach(clearTimeout);
         items = items.filter(it => it.el.classList.contains('on'));   // tags still waiting to drop never appear

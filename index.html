@@ -450,11 +450,13 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
   .crumbs .seg:not(#seg0){display:none}
   .pager,.dots{display:none}
   #about .grid{min-height:0; grid-template-columns:1fr}
-  .about-left{padding-top:calc(var(--pad) * 3); padding-bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:var(--gut)}
-  .skills{margin:0; padding:0; align-self:start}
-  .about-photo{min-height:0; aspect-ratio:4/5; margin-top:var(--gut)}
-  .about-photo img{position:absolute; inset:0; height:100%}
+  .about-left{padding-top:var(--gut); padding-bottom:0; display:grid; grid-template-columns:1fr 1fr; gap:var(--gut)}
+  .skills{display:none}
+  /* photo: full-bleed strip across the top, a fifth of the screen tall */
+  .about-photo{order:-1; min-height:0; height:20svh; margin:0 calc(var(--pad) * -1); border-radius:0}
+  .about-photo img{position:absolute; inset:0; height:100%; object-position:50% 22%; transform:none !important}
   .about-copy{padding-top:0; margin:var(--gut) 0}
+  .about-copy + .about-copy{margin-top:calc(-1 * var(--gut) + 1.14em)}   /* the two columns stack with one paragraph space, like the rest */
   .deck{height:auto !important}
   html,body{overflow-x:clip}
   .stage{position:static; height:auto; overflow:visible; display:flex; flex-direction:column; padding:calc(var(--pad) * 2.2) 0 var(--pad); background:var(--paper) !important; color:#000 !important}
@@ -520,7 +522,8 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
     </div>
     <div class="about-photo" data-parallax="0.12"><img src="img/about-photo.jpg" alt="Billy Newton working on a laptop in a black jacket, sat in an orange chair by a window" width="892" height="2160" fetchpriority="high"></div>
     <div class="body about-copy rv" style="--d:160ms">
-      <p>I build systems so nobody has to solve the same problem twice.<br>At Checkout.com, I work between brand, ops and product. I find the slow spot, make the case, then use Claude Code and Figma to turn it into a one-click fix.</p>
+      <p>I build systems so nobody has to solve the same problem twice.</p>
+      <p>At Checkout.com, I work between brand, ops and product. I find the slow spot, make the case, then use Claude Code and Figma to turn it into a one-click fix.</p>
       <p>A proposal that took 80 hours now takes five minutes. A four-hour job is now a template anyone can use. When deals are worth billions, design isn't decoration. It's trust.</p>
     </div>
     <div class="body about-copy rv" style="--d:280ms">
