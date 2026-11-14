@@ -17,7 +17,8 @@
    The 404 lockup sits on a 1920x1080 stage scaled by --u; corner text
    stays pinned to the viewport. After IDLE_MS without input the ten
    skill tags drop in under gravity and pile up; the cursor shoves them
-   around, and they can be grabbed and thrown.
+   around, and they can be grabbed and thrown. Clicking or tapping off
+   the tags drops the floor so they fall away; they return after IDLE_MS.
    ============================================================ */
 :root{
   --u: min(100vw / 1400, 100svh / 1080);   /* 1 Figma px on the stage */
@@ -191,21 +192,21 @@ addEventListener('DOMContentLoaded', () => {
     const engine = Engine.create({gravity:{y:1.1}});
     const TAG = 0x2, HAND = 0x4;
     const W = () => innerWidth, H = () => innerHeight, T = 400;
-    let walls = [];
+    let walls = [], floorOn = true, raf = 0;
     const buildWalls = () => {
       Composite.remove(engine.world, walls);
       walls = [
-        Bodies.rectangle(W()/2, H() + T/2, W() * 3, T, {isStatic:true}),
         Bodies.rectangle(-T/2, H()/2 - H(), T, H() * 4, {isStatic:true}),
         Bodies.rectangle(W() + T/2, H()/2 - H(), T, H() * 4, {isStatic:true}),
       ];
+      if (floorOn) walls.push(Bodies.rectangle(W()/2, H() + T/2, W() * 3, T, {isStatic:true}));
       Composite.add(engine.world, walls);
     };
     buildWalls();
 
     // shuffle the drop order so it reads differently every time
     const order = els.map((el, i) => ({el, k:Math.random()})).sort((a, b) => a.k - b.k).map(o => o.el);
-    const items = order.map((el, i) => {
+    let items = order.map((el, i) => {
       const w = el.offsetWidth, h = el.offsetHeight;
       const r = parseFloat(getComputedStyle(el).borderRadius) || 0;
       const x = w/2 + Math.random() * Math.max(1, W() - w);
@@ -218,7 +219,8 @@ addEventListener('DOMContentLoaded', () => {
       return {el, b, w, h, at: i * 260};
     });
     const start = performance.now();
-    items.forEach(it => setTimeout(() => { Composite.add(engine.world, it.b); it.el.classList.add('on'); }, it.at));
+    const all = items.slice(), timers = [];
+    items.forEach(it => timers.push(setTimeout(() => { Composite.add(engine.world, it.b); it.el.classList.add('on'); }, it.at)));
 
 
     // the pointer is a heavy invisible disc; steering it by velocity (not position)
@@ -244,6 +246,7 @@ addEventListener('DOMContentLoaded', () => {
     // grab and throw
     let grab = null;
     items.forEach(it => it.el.addEventListener('pointerdown', e => {
+      e.stopPropagation();
       const p = {x:e.clientX, y:e.clientY};
       const local = Matter.Vector.rotate(Matter.Vector.sub(p, it.b.position), -it.b.angle);
       grab = {it, c: Constraint.create({pointA:p, bodyB:it.b, pointB:Matter.Vector.rotate(local, it.b.angle), stiffness:.2, damping:.1, length:0})};
@@ -264,6 +267,16 @@ addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    // clicking or tapping off the tags drops the floor and they fall away
+    const offTags = () => {
+      if (!floorOn) return;
+      floorOn = false; release(); handOn(false); timers.forEach(clearTimeout);
+      items = items.filter(it => it.el.classList.contains('on'));   // tags still waiting to drop never appear
+      items.forEach(it => Body.setVelocity(it.b, {x:it.b.velocity.x, y:Math.max(it.b.velocity.y, 6)}));
+      buildWalls();
+    };
+    addEventListener('pointerdown', offTags);
+
     let last = performance.now();
     (function tick(now){
       steer();
@@ -271,7 +284,15 @@ addEventListener('DOMContentLoaded', () => {
       for (const {el, b, w, h} of items){
         el.style.transform = `translate(${b.position.x - w/2}px, ${b.position.y - h/2}px) rotate(${b.angle}rad)`;
       }
-      requestAnimationFrame(tick);
+      if (!floorOn && items.every(({b, h}) => b.position.y - h > H())){
+        removeEventListener('pointerdown', offTags);
+        all.forEach(it => { it.el.classList.remove('on', 'drag'); it.el.style.transform = ''; it.el.replaceWith(it.el.cloneNode(true)); });
+        Composite.clear(engine.world, false); Engine.clear(engine);
+        els.splice(0, els.length, ...layer.children);
+        dropped = false; idle();
+        return;
+      }
+      raf = requestAnimationFrame(tick);
     })(last);
   }
 });

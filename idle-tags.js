@@ -4,7 +4,8 @@
    (same behaviour as the 404 page). The cursor shoves them around and
    they can be grabbed and thrown. Scrolling, a key press or a touch
    drops the floor so they fall away, then the idle clock restarts.
-   Once someone grabs a tag the pile is theirs: it stays put to play with.
+   Once someone grabs a tag the pile is theirs: it stays put to play with,
+   until they click or tap anywhere off the tags.
    Skipped on the cover (body.on-cover) and while a dialog is open.
    On the footer (body.on-end) the tags are black with two white.
    On Projects (#work) they wait until no project is hovered, clear
@@ -80,6 +81,8 @@
   ['pointermove','pointerdown','keydown','wheel','touchstart','scroll'].forEach(t => addEventListener(t, idle, {passive:true}));
   // anything that moves the page clears the pile
   ['wheel','keydown','touchmove','scroll'].forEach(t => addEventListener(t, () => world && world.clear(), {passive:true}));
+  // clicking off the tags always clears them, even a pile someone has played with
+  addEventListener('pointerdown', e => { if (world && !e.target.closest?.('.itag')) world.clear(true); }, {passive:true});
   idle();
 
   const load = () => loading ||= window.Matter ? Promise.resolve() : new Promise((ok, no) => {
@@ -210,8 +213,8 @@
     })(last);
 
     return {
-      clear(){
-        if (!floorOn || kept) return;
+      clear(force){
+        if (!floorOn || (kept && !force)) return;
         floorOn = false; release(); handOn(false); scrim.classList.remove('on');
         timers.forEach(clearTimeout);
         items = items.filter(it => it.el.classList.contains('on'));   // tags still waiting to drop never appear
