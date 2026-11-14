@@ -508,6 +508,13 @@ body.on-end .crumbs{opacity:0; pointer-events:none; transition:opacity .4s var(-
   #end .meta{grid-template-columns:1fr 1fr}
   #end .meta .r{text-align:left}
 }
+@media (max-width: 900px){
+  /* iOS Safari's toolbar floats over the page, so the small viewport (svh) stops short of the screen: use the large one */
+  #cover{height:100lvh}
+  #end{min-height:100lvh}
+}
+/* on the footer, whatever Safari paints past the end of the page (behind the toolbar, overscroll) is footer green too */
+html:has(body.on-end){background:#B3FF1A}
 @media (max-width: 600px){
   .about-left{grid-template-columns:1fr}
   .lockup{font-size:clamp(1.6rem, 9.5vw, 3rem)}
@@ -1055,6 +1062,7 @@ const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine    = matchMedia('(pointer: fine)').matches;
 const flowMQ  = matchMedia('(max-width: 900px)');
+const themeColor = document.querySelector('meta[name="theme-color"]');
 /* dialogs leave with their animation instead of vanishing; Escape goes through the same path */
 function softClose(d){ if (!d.open || d.classList.contains('closing')) return; if (reduced){ d.close(); return; } d.classList.add('closing'); let done = false; const fin = () => { if (done) return; done = true; d.classList.remove('closing'); if (d.open) d.close(); }; d.addEventListener('animationend', fin, {once:true}); setTimeout(fin, 320); }
 function softDialog(d){ d.addEventListener('cancel', e => { e.preventDefault(); softClose(d); }); }
@@ -1196,7 +1204,7 @@ const Deck = (() => {
     playVideos(d, slide);
     d.deck.dispatchEvent(new CustomEvent('stepchange', { detail: { slide, i } }));
   }
-  function activate(n){ if (n === active || n < 0 || n >= total) return; active = n; const s = steps[n]; if (document.body.dataset.solo && s.el.classList.contains('outro')){ if (location.hash !== '#work') location.hash = 'work'; return; } crumbs(s.crumbs, s.d && s.title); pager(n, s.title); setDots(s.d); document.body.classList.toggle('on-end', s.el.id === 'end'); document.body.classList.toggle('on-cover', s.el.id === 'cover'); }
+  function activate(n){ if (n === active || n < 0 || n >= total) return; active = n; const s = steps[n]; if (document.body.dataset.solo && s.el.classList.contains('outro')){ if (location.hash !== '#work') location.hash = 'work'; return; } crumbs(s.crumbs, s.d && s.title); pager(n, s.title); setDots(s.d); document.body.classList.toggle('on-end', s.el.id === 'end'); themeColor.content = s.el.id === 'end' ? '#B3FF1A' : '#181818'; document.body.classList.toggle('on-cover', s.el.id === 'cover'); }
   function update(){
     const vh = innerHeight, mid = vh * .5; let best = -1;
     if (!flowMQ.matches) for (const d of decks){
