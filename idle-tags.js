@@ -68,10 +68,12 @@
   });
   document.addEventListener('playing', () => { if (world && playing()) world.clear(); }, true);
   const hovered = () => onWork() && !!work.dataset.art;
+  // the footer drops its own labels, so these clear the moment it arrives
+  new MutationObserver(() => { if (world && document.body.classList.contains('on-end')) world.clear(true); }).observe(document.body, {attributes:true, attributeFilter:['class']});
   if (work) new MutationObserver(() => { if (world && work.dataset.art) world.clear(); }).observe(work, {attributes:true, attributeFilter:['data-art']});
 
   let world = null, timer, loading = null;
-  const blocked = () => document.body.classList.contains('on-cover') || document.querySelector('dialog[open]') || hovered() || playing();
+  const blocked = () => document.body.classList.contains('on-cover') || document.body.classList.contains('on-end') || document.querySelector('dialog[open]') || hovered() || playing();
   const inProject = () => {
     if (document.body.dataset.solo) return true;
     const el = document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('section');
